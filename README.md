@@ -12,7 +12,7 @@ override:
     replacements:
         ":discord_emoji:": "\uE002" # replace with ur unicode symbole
 ```
-
+### Texture pack side
 Use a additional texture pack to replace Unicode emojis by images <br>
 `${texturepack_folder}/assets/minecraft/font/include/default.json`
 ```json
