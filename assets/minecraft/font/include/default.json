@@ -55,6 +55,13 @@
             "ascent": 50,
             "height": 50,
             "chars": ["\uE102"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/stickers/ratiopaslu.png",
+            "ascent": 50,
+            "height": 50,
+            "chars": ["\uE103"]
         }
     ]
 }
