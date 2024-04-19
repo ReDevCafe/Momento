@@ -2,10 +2,9 @@ package org.momento;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.*;
+import org.momento.Events.*;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.momento.Events.ChatSystem;
 
 public final class Momento extends JavaPlugin {
 
@@ -20,6 +19,8 @@ public final class Momento extends JavaPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
 
         pluginManager.registerEvents(new ChatSystem(), this);
+        pluginManager.registerEvents(new AnvilRename(), this);
+        pluginManager.registerEvents(new SignEvent(), this);
     }
 
     @Override
