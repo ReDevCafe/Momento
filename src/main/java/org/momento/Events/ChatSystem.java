@@ -11,7 +11,6 @@ public class ChatSystem implements Listener
     @EventHandler
     public void onPlayerChat(AsyncPlayerChatEvent event) 
     {
-        String message = event.getMessage();
-        event.setMessage(EmojiSystem.EmojiStringReplacer(message));
+        event.setMessage(EmojiSystem.EmojiStringReplacer(event.getMessage()));
     }
 }
