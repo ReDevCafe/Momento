@@ -1,24 +1,9 @@
 override:
-  words:
-    # emojis
-    - ":astolfo_tea:"
-    - ":zerotwo_heartlove:"
-    - ":Worry:"
-    - ":monikaheart:"
-    - ":yanfeiowo:"
-    - ":ohhhh:"
-    # stickers
-    - "eltysus"
-    - "ohnourip"
-  replacements:
-    #emojis
-    ":astolfo_tea:": "\uE002"
-    ":zerotwo_heartlove:": "\uE003"
-    ":Worry:": "\uE004"
-    ":monikaheart:": "\uE005"
-    ":yanfeiowo:": "\uE006"
-    ":ohhhh:": "\uE007"
-    # stickers
-    "eltysus": "\n\n\n\n\n\n\uE101\n\n\n" # tricky but it work lmao
-    "ohnourip": "\n\n\n\n\n\n\uE102\n"
-
+  ":astolfo_tea:": "\uE002"
+  ":zerotwo_heartlove:": "\uE003"
+  ":Worry:": "\uE004"
+  ":monikaheart:": "\uE005"
+  ":yanfeiowo:": "\uE006"
+  ":ohhhh:": "\uE007"
+  "eltysus": "\n\n\n\n\n\n\uE101\n\n\n" # tricky but it work lmao
+  "ohnourip": "\n\n\n\n\n\n\uE102\n"

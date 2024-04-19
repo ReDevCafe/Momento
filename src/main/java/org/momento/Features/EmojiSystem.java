@@ -12,7 +12,7 @@ public class EmojiSystem {
             String word = entry.getKey();
             String replacement = entry.getValue().toString();
             if (message.contains(word))
-                message = message.replaceAll("(?i)" + word, replacement);
+                message = message.replaceAll("(?i)" + word, "§r"+replacement);
         }
         return message;
     }
