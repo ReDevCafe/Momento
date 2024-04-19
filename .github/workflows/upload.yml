@@ -1,0 +1,39 @@
+name: Releasing texture pack
+on:
+  push:
+    tags:
+    - 'v*.*.*'
+
+jobs:
+  job1:
+    name: Upload texture pack
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: checking branch
+        uses: actions/checkout@v3
+
+      - name: Redeem the sent Tag 🏷️
+        run: |
+          TAG=$(git describe --tags --abbrev=0)
+          TAG="${TAG#v}"
+          echo "LATEST_TAG=$TAG" >> $GITHUB_ENV
+
+      - name: Compressing texture
+        uses: thedoctor0/zip-release@0.7.1
+        with:
+          type: 'zip'
+          filename: 'MomentoAssets.zip'
+          exclusions: '*.git*'
+
+      - name: Uploading the Texture
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          generateReleaseNotes: true
+          draft: false
+          tag: "v${{ env.LATEST_TAG }}"
+          name: "Momento asset ${{ env.LATEST_TAG }}🌙"
+          artifacts: "*.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
