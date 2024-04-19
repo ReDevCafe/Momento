@@ -1,0 +1,60 @@
+{
+    "providers": [
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/astolfo_tea.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE002"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/zerotwo_heartlove.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE003"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/worry.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE004"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/monikaheart.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE005"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/yanfeiowo.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE006"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/ohhhh.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE007"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/stickers/eltysus.png",
+            "ascent": 50,
+            "height": 70,
+            "chars": ["\uE101"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/stickers/ohnourip.png",
+            "ascent": 50,
+            "height": 50,
+            "chars": ["\uE102"]
+        }
+    ]
+}

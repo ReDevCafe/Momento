@@ -1,4 +1,4 @@
-# Momento
+# Momento resource pack
 
 ![](https://github.com/MignonPetitXelow/Momento/blob/main/.assets/exa1.png)
 

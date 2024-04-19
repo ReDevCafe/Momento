@@ -1,4 +1,0 @@
-name: Momento
-version: '${project.version}'
-main: org.momento.Momento
-api-version: '1.20'
