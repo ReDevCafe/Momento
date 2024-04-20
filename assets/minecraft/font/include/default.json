@@ -44,6 +44,13 @@
         },
         {
             "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/shug.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE008"]
+        },
+        {
+            "type": "bitmap",
             "file": "minecraft:font/custom/stickers/eltysus.png",
             "ascent": 50,
             "height": 70,
