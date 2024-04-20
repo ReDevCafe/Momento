@@ -11,7 +11,7 @@ public class EmojiSystem {
         {
             String word = entry.getKey();
             String replacement = entry.getValue().toString();
-            if (message.contains(word))
+            if (message.toLowerCase().contains(word.toLowerCase()))
                 message = message.replaceAll("(?i)" + word, "§f"+replacement+"§r");
         }
         return message;
