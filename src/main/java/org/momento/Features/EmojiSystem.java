@@ -4,16 +4,29 @@ import org.momento.Momento;
 import java.util.Map;
 
 public class EmojiSystem {
-    public static String EmojiStringReplacer(String message) {
-        Map<String, Object> overrideMap = Momento.config.getConfigurationSection("override").getValues(false);
 
-        for (Map.Entry<String, Object> entry : overrideMap.entrySet()) 
-        {
+    public static String StringReplacer(String message, String sectionKey) {
+        if(message.length() <= 1) return message;
+
+        Map<String, Object> overrideMap = Momento.config.getConfigurationSection("chat." + sectionKey).getValues(false);
+
+        for (Map.Entry<String, Object> entry : overrideMap.entrySet()) {
             String word = entry.getKey();
             String replacement = entry.getValue().toString();
             if (message.toLowerCase().contains(word.toLowerCase()))
-                message = message.replaceAll("(?i)" + word, "§f"+replacement+"§r");
+                message = message.replaceAll("(?i)" + word, "§f" + replacement + "§r");
         }
+
         return message;
     }
+
+    public static String EmojiAndStickerStringReplacer(String message) {
+        String replacedMessage = StringReplacer(message, "emoji");
+        
+        if(message.equals(replacedMessage))
+            replacedMessage = StringReplacer(replacedMessage, "sticker");
+
+        return replacedMessage;
+    }
+
 }

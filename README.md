@@ -6,11 +6,15 @@
 
 in plugin config.yml:
 ```yml
-override:
+chat:
+  "emoji":
     ":discord_emoji:": "\uE002" # replace with ur unicode symbole
+    
+  "sticker":                    
+    "discord_sticker": "\uE102" # replace with ur unicode symbole
 ```
 
-### Texture pack sidesi
+### Texture pack side
 Use a additional texture pack to replace Unicode emojis by images <br>
 ```bash
 ${texturepack_folder}/assets/minecraft/font/include/default.json
@@ -24,6 +28,13 @@ ${texturepack_folder}/assets/minecraft/font/include/default.json
             "ascent": 7,
             "height": 8,
             "chars": ["\uE002"]
+        },
+        {
+          "type": "bitmap",
+          "file": "minecraft:font/custom/sticker/discord_emoji.png",
+          "ascent": 7,
+          "height": 8,
+          "chars": ["\uE002"]
         }
     ]
 }

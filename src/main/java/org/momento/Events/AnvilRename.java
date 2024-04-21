@@ -16,7 +16,7 @@ public class AnvilRename implements Listener{
         if( renamedItem == null || !renamedItem.hasItemMeta()) return;
 
         ItemMeta meta = renamedItem.getItemMeta();
-        meta.setDisplayName(EmojiSystem.EmojiStringReplacer(meta.getDisplayName()));
+        meta.setDisplayName(EmojiSystem.StringReplacer(meta.getDisplayName(), "emoji"));
         renamedItem.setItemMeta(meta);
     }
 }
