@@ -31,10 +31,10 @@ ${texturepack_folder}/assets/minecraft/font/include/default.json
         },
         {
           "type": "bitmap",
-          "file": "minecraft:font/custom/sticker/discord_emoji.png",
+          "file": "minecraft:font/custom/sticker/discord_sticker.png",
           "ascent": 7,
           "height": 8,
-          "chars": ["\uE002"]
+          "chars": ["\uE102"]
         }
     ]
 }
