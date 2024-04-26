@@ -51,6 +51,97 @@
         },
         {
             "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/trans.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE009"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/lgbt.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE010"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/femboy.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE011"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/lesbian.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE012"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/gaymen.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE013"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/bisexual.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE014"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/intersex.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE015"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/asexual.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE016"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/bigender.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE017"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/genderfluid.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE018"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/genderqueer.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE019"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/nonbinary.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE020"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:font/custom/emojis/pansexual.png",
+            "ascent": 7,
+            "height": 8,
+            "chars": ["\uE021"]
+        },
+        {
+            "type": "bitmap",
             "file": "minecraft:font/custom/stickers/eltysus.png",
             "ascent": 50,
             "height": 70,
