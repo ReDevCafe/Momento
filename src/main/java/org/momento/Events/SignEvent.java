@@ -10,9 +10,9 @@ public class SignEvent implements Listener {
     @EventHandler
     public void onSignChange(SignChangeEvent event) {
         String[] lines = event.getLines();
-        if(lines == null || lines.length == 0) return;
+        if(lines.length == 0) return;
         
         for(int i = 0; i < lines.length; i++)
-            event.setLine(i, EmojiSystem.EmojiStringReplacer(lines[i]));
+            event.setLine(i, EmojiSystem.StringReplacer(lines[i], "emoji"));
     }
 }

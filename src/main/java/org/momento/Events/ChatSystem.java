@@ -9,8 +9,8 @@ import org.momento.Features.EmojiSystem;
 public class ChatSystem implements Listener
 {
     @EventHandler
-    public void onPlayerChat(AsyncPlayerChatEvent event) 
+    public void onPlayerChat(AsyncPlayerChatEvent event)
     {
-        event.setMessage(EmojiSystem.EmojiStringReplacer(event.getMessage()));
+        event.setMessage(EmojiSystem.EmojiAndStickerStringReplacer(event.getMessage()));
     }
 }

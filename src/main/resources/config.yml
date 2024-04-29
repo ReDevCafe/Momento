@@ -1,9 +1,13 @@
-override:
-  ":astolfo_tea:": "\uE002"
-  ":zerotwo_heartlove:": "\uE003"
-  ":Worry:": "\uE004"
-  ":monikaheart:": "\uE005"
-  ":yanfeiowo:": "\uE006"
-  ":ohhhh:": "\uE007"
-  "eltysus": "\n\n\n\n\n\n\uE101\n\n\n" # tricky but it work lmao
-  "ohnourip": "\n\n\n\n\n\n\uE102\n"
+chat:
+  emoji:
+    ":astolfo_tea:": "\uE002"
+    ":zerotwo_heartlove:": "\uE003"
+    ":Worry:": "\uE004"
+    ":monikaheart:": "\uE005"
+    ":yanfeiowo:": "\uE006"
+    ":ohhhh:": "\uE007"
+    ":S_hug:": "\uE008"
+  sticker:
+    "eltysus": "\n\n\n\n\n\n\uE101\n\n\n" # tricky but it work lmao
+    "oh no ur ip": "\n\n\n\n\n\n\uE102\n"
+    "ratio plus pas lu": "\n\n\n\n\n\n\uE103\n"
