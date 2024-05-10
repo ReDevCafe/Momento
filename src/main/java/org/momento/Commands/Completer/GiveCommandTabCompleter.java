@@ -3,13 +3,11 @@ package org.momento.Commands.Completer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.bukkit.inventory.ItemStack;
-import org.momento.Features.ShieldFeature;
+import org.momento.Features.Implements.ShieldFeature;
 import org.momento.Momento;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class GiveCommandTabCompleter implements TabCompleter
 {
@@ -26,9 +24,7 @@ public class GiveCommandTabCompleter implements TabCompleter
                 break;
             case 2:
             {
-                Map<String, ItemStack> shieldList = ShieldFeature.shieldList;
-
-                completions.addAll(shieldList.keySet());
+                completions.addAll(ShieldFeature.shieldList.keySet());
                 break;
             }
         }

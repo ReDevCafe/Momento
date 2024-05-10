@@ -7,7 +7,7 @@ import org.momento.Commands.Completer.GiveCommandTabCompleter;
 import org.momento.Commands.GiveCommand;
 import org.momento.Events.*;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.momento.Features.ShieldFeature;
+import org.momento.Features.Implements.ShieldFeature;
 
 public final class Momento extends JavaPlugin {
 
@@ -26,7 +26,6 @@ public final class Momento extends JavaPlugin {
         pluginManager.registerEvents(new AnvilRename(), this);
         pluginManager.registerEvents(new SignEvent(), this);
         pluginManager.registerEvents(new PlayerShieldBlock(), this);
-        System.out.println(Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3]);
 
         ShieldFeature.populateShields();
 
