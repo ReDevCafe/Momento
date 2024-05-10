@@ -2,3 +2,15 @@ name: Momento
 version: '${project.version}'
 main: org.momento.Momento
 api-version: '1.20'
+
+commands:
+  momento:
+    description: Momento Cosmetica main command
+    usage: /<command> [subcommand]
+    aliases: [mom]
+    permission: momento.debug
+    subcommands:
+      give:
+        description: give object to player
+        usage: /<command> give [type] [object]
+        permission: momento.give

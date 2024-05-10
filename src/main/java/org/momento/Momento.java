@@ -3,24 +3,35 @@ package org.momento;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.*;
+import org.momento.Commands.Completer.GiveCommandTabCompleter;
+import org.momento.Commands.GiveCommand;
 import org.momento.Events.*;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.momento.Features.ShieldFeature;
 
 public final class Momento extends JavaPlugin {
 
     public static FileConfiguration config;
     public static Plugin plugin;
 
+    //TODO: put pluginManager and getCommand somewhere else
     @Override
     public void onEnable() {
         saveDefaultConfig();
         config = getConfig();
+        plugin = this;
 
         PluginManager pluginManager = Bukkit.getPluginManager();
-
         pluginManager.registerEvents(new ChatSystem(), this);
         pluginManager.registerEvents(new AnvilRename(), this);
         pluginManager.registerEvents(new SignEvent(), this);
+        pluginManager.registerEvents(new PlayerShieldBlock(), this);
+        System.out.println(Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3]);
+
+        ShieldFeature.populateShields();
+
+        getCommand("momento").setExecutor(new GiveCommand(this));
+        getCommand("momento").setTabCompleter(new GiveCommandTabCompleter(this));
     }
 
     @Override
