@@ -15,20 +15,22 @@ public class GiveCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
+    {
         if (!(sender instanceof Player)) {
             sender.sendMessage("This command can only be used by players.");
             return true;
         }
 
         if (args.length < 1) {
-            sender.sendMessage("Usage: /momento give [type]' <object>");
+            sender.sendMessage("Usage: /momento give [type] <object>");
             return true;
         }
 
+        if(args.length != 2) return false; // for now
+
         Player player = (Player) sender;
         String shieldName = args[1];
-        System.out.println(ShieldFeature.shieldList.size());
 
         try {
             ItemStack shield = ShieldFeature.shieldList.get(shieldName);

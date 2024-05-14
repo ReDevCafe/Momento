@@ -5,6 +5,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.momento.Momento;
 
@@ -14,33 +15,43 @@ public class ItemFeature
     private final String displayName;
     private final Material material;
     private final long durability;
-    private final int modeleData;
+    private final int modelData;
 
-    public ItemFeature(String name, Material material, long durability, int modeleData)
+    public ItemFeature(String name, Material material, long durability, int modelData)
     {
         this.displayName = name;
         this.material = material;
         this.durability = durability;
-        this.modeleData = modeleData;
+        this.modelData = modelData;
     }
 
     public ItemStack createItem() {
+        if(durability <= 0 || material == Material.AIR || displayName == null) return null;
+
         ItemStack item = new ItemStack(material);
         ItemMeta meta = item.getItemMeta();
 
         assert meta != null;
         meta.setDisplayName("§r§f" + displayName);
-        meta.setCustomModelData(modeleData);
-
-        NamespacedKey momentoItemKey = new NamespacedKey(Momento.plugin, "momento_item");
-        NamespacedKey durabilityKey = new NamespacedKey(Momento.plugin, "momento_durability");
-        NamespacedKey maxDurabilityKey = new NamespacedKey(Momento.plugin, "momento_maxdurability");
-
-        meta.getPersistentDataContainer().set(durabilityKey, PersistentDataType.LONG, durability);
-        meta.getPersistentDataContainer().set(maxDurabilityKey, PersistentDataType.LONG, durability);
-        meta.getPersistentDataContainer().set(momentoItemKey, PersistentDataType.BOOLEAN, true);
+        meta.setCustomModelData(modelData);
+        PersistentDataContainer data = meta.getPersistentDataContainer();
+        data.set(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG, durability);
+        data.set(new NamespacedKey(Momento.plugin, "momento_maxdurability"), PersistentDataType.LONG, durability);
 
         item.setItemMeta(meta);
         return item;
+    }
+
+    public static long calculateDurabilityWithUnbreaking(long durability, int duraEnch)
+    {
+        if (duraEnch > 0) {
+            double reductionChance = 100.0 / (duraEnch + 1);
+            if (Math.random() < reductionChance / 100.0)
+                durability--;
+
+        } else
+            durability--;
+
+        return durability;
     }
 }

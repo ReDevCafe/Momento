@@ -7,9 +7,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.momento.Features.ItemFeature;
 import org.momento.Momento;
 
 import java.util.Arrays;
@@ -20,32 +23,32 @@ public class PlayerShieldBlock implements Listener {
         if (!(event.getEntity() instanceof Player)) return;
 
         Player player = (Player) event.getEntity();
-        if (!player.isBlocking() || player.getEquipment() == null || player.getEquipment().getItemInMainHand().getType() == Material.AIR) return;
-        ItemStack shield = player.getEquipment().getItemInMainHand();
+        EntityEquipment equipment = player.getEquipment();
+        if (!player.isBlocking() || equipment == null || (equipment.getItemInMainHand().getType() != Material.SHIELD &&  equipment.getItemInOffHand().getType() != Material.SHIELD)) return;
+
+        ItemStack shield = equipment.getItemInMainHand().getType() == Material.AIR
+                ? equipment.getItemInOffHand().getType() == Material.AIR
+                ? null : equipment.getItemInOffHand() : equipment.getItemInMainHand();
+        if (shield == null) return;
 
         ItemMeta meta = shield.getItemMeta();
+        PersistentDataContainer data = meta.getPersistentDataContainer();
+        if (!data.has(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG)) return;
 
-        if (meta.getPersistentDataContainer().has(new NamespacedKey(Momento.plugin, "momento_item"), PersistentDataType.BOOLEAN)) {
-            if (meta.getPersistentDataContainer().has(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG)) {
-                long durability = meta.getPersistentDataContainer().get(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG);
-                long maxdurability = meta.getPersistentDataContainer().get(new NamespacedKey(Momento.plugin, "momento_maxdurability"), PersistentDataType.LONG);
+        long durability = data.get(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG);
+        long maxDurability = data.get(new NamespacedKey(Momento.plugin, "momento_maxdurability"), PersistentDataType.LONG);
 
-                int duraEnch = meta.getEnchants().getOrDefault(Enchantment.DURABILITY, 0);
-                durability -= duraEnch > 0 ? Math.max(1, (int) (Math.random() * duraEnch)) : 1;
+        durability = ItemFeature.calculateDurabilityWithUnbreaking(
+                durability, meta.getEnchants().getOrDefault(Enchantment.DURABILITY, 0)
+        );
 
-                if (durability <= 0) {
-                    player.getInventory().remove(shield);
-                    return;
-                }
+        data.set(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG, durability);
+        meta.setLore(Arrays.asList("", "§fDurability: "+durability + " / " + maxDurability));
+        shield.setItemMeta(meta);
 
-                meta.setLore(Arrays.asList("", "§fDurability: "+durability + " / " + maxdurability));
+        event.setCancelled(true);
 
-                meta.getPersistentDataContainer().set(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG, durability);
-
-                shield.setItemMeta(meta);
-                event.setCancelled(true);
-            }
-        }
-
+        if (durability > 0) return;
+        player.getInventory().remove(shield);
     }
 }
