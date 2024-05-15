@@ -22,12 +22,7 @@ public class GiveCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length < 1) {
-            sender.sendMessage("Usage: /momento give [type] <object>");
-            return true;
-        }
-
-        if(args.length != 2) return false; // for now
+        if (args.length != 2) return false;
 
         Player player = (Player) sender;
         String shieldName = args[1];

@@ -26,10 +26,12 @@ public class PlayerShieldBlock implements Listener {
         EntityEquipment equipment = player.getEquipment();
         if (!player.isBlocking() || equipment == null || (equipment.getItemInMainHand().getType() != Material.SHIELD &&  equipment.getItemInOffHand().getType() != Material.SHIELD)) return;
 
-        ItemStack shield = equipment.getItemInMainHand().getType() == Material.AIR
-                ? equipment.getItemInOffHand().getType() == Material.AIR
-                ? null : equipment.getItemInOffHand() : equipment.getItemInMainHand();
-        if (shield == null) return;
+        ItemStack shield;
+        if(equipment.getItemInMainHand().getType() == Material.SHIELD)
+            shield = equipment.getItemInOffHand();
+        else if (equipment.getItemInOffHand().getType() == Material.SHIELD)
+            shield = equipment.getItemInOffHand();
+        else return;
 
         ItemMeta meta = shield.getItemMeta();
         PersistentDataContainer data = meta.getPersistentDataContainer();
