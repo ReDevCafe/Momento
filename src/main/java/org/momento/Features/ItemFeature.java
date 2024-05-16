@@ -2,12 +2,11 @@ package org.momento.Features;
 
 
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
-import org.momento.Momento;
+import org.momento.Data.MomentoKeys;
 
 public class ItemFeature
 {
@@ -35,8 +34,8 @@ public class ItemFeature
         meta.setDisplayName("§r§f" + displayName);
         meta.setCustomModelData(modelData);
         PersistentDataContainer data = meta.getPersistentDataContainer();
-        data.set(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG, durability);
-        data.set(new NamespacedKey(Momento.plugin, "momento_maxdurability"), PersistentDataType.LONG, durability);
+        data.set(MomentoKeys.DURABILITY, PersistentDataType.LONG, durability);
+        data.set(MomentoKeys.MAX_DURABILITY, PersistentDataType.LONG, durability);
 
         item.setItemMeta(meta);
         return item;

@@ -1,7 +1,6 @@
 package org.momento.Events;
 
 import org.bukkit.Material;
-import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,8 +11,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.momento.Data.MomentoKeys;
 import org.momento.Features.ItemFeature;
-import org.momento.Momento;
 
 import java.util.Arrays;
 public class PlayerShieldBlock implements Listener {
@@ -28,23 +27,25 @@ public class PlayerShieldBlock implements Listener {
 
         ItemStack shield;
         if(equipment.getItemInMainHand().getType() == Material.SHIELD)
-            shield = equipment.getItemInOffHand();
+            shield = equipment.getItemInMainHand();
         else if (equipment.getItemInOffHand().getType() == Material.SHIELD)
             shield = equipment.getItemInOffHand();
         else return;
 
         ItemMeta meta = shield.getItemMeta();
-        PersistentDataContainer data = meta.getPersistentDataContainer();
-        if (!data.has(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG)) return;
+        assert meta != null;
 
-        long durability = data.get(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG);
-        long maxDurability = data.get(new NamespacedKey(Momento.plugin, "momento_maxdurability"), PersistentDataType.LONG);
+        PersistentDataContainer data = meta.getPersistentDataContainer();
+        if (!data.has(MomentoKeys.DURABILITY, PersistentDataType.LONG)) return;
+
+        long durability = data.get(MomentoKeys.DURABILITY, PersistentDataType.LONG);
+        long maxDurability = data.get(MomentoKeys.MAX_DURABILITY, PersistentDataType.LONG);
 
         durability = ItemFeature.calculateDurabilityWithUnbreaking(
                 durability, meta.getEnchants().getOrDefault(Enchantment.DURABILITY, 0)
         );
 
-        data.set(new NamespacedKey(Momento.plugin, "momento_durability"), PersistentDataType.LONG, durability);
+        data.set(MomentoKeys.DURABILITY, PersistentDataType.LONG, durability);
         meta.setLore(Arrays.asList("", "§fDurability: "+durability + " / " + maxDurability));
         shield.setItemMeta(meta);
 
