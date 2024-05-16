@@ -11,3 +11,9 @@ chat:
     "eltysus": "\n\n\n\n\n\n\uE101\n\n\n" # tricky but it work lmao
     "oh no ur ip": "\n\n\n\n\n\n\uE102\n"
     "ratio plus pas lu": "\n\n\n\n\n\n\uE103\n"
+
+shields:
+  dirt_shield:
+    "displayName": "§dDirt shield"
+    "durability": 1
+    "modelData": 1
