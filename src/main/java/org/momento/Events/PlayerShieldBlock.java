@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.momento.Data.MomentoKeys;
-import org.momento.Features.ItemFeature;
 
 import java.util.Arrays;
 public class PlayerShieldBlock implements Listener {
@@ -40,10 +39,14 @@ public class PlayerShieldBlock implements Listener {
 
         long durability = data.get(MomentoKeys.DURABILITY, PersistentDataType.LONG);
         long maxDurability = data.get(MomentoKeys.MAX_DURABILITY, PersistentDataType.LONG);
+        int duraEnch = meta.getEnchants().getOrDefault(Enchantment.DURABILITY, 0);
 
-        durability = ItemFeature.calculateDurabilityWithUnbreaking(
-                durability, meta.getEnchants().getOrDefault(Enchantment.DURABILITY, 0)
-        );
+        if (duraEnch > 0) {
+            double reductionChance = 100.0 / (duraEnch + 1);
+            if (Math.random() < reductionChance / 100.0)
+                durability--;
+        } else
+            durability--;
 
         data.set(MomentoKeys.DURABILITY, PersistentDataType.LONG, durability);
         meta.setLore(Arrays.asList("", "§fDurability: "+durability + " / " + maxDurability));
