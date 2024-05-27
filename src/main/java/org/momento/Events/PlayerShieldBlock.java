@@ -42,8 +42,7 @@ public class PlayerShieldBlock implements Listener {
         int duraEnch = meta.getEnchants().getOrDefault(Enchantment.DURABILITY, 0);
 
         if (duraEnch > 0) {
-            double reductionChance = 100.0 / (duraEnch + 1);
-            if (Math.random() < reductionChance / 100.0)
+            if (Math.random() < (100.0 / (duraEnch + 1)) / 100.0)
                 durability--;
         } else
             durability--;
