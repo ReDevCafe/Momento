@@ -1,11 +1,13 @@
-package org.momento.Features.Item.Component;
+package org.momento.Features.Item.Component.Data;
 
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.momento.Features.Item.ItemComponent;
 
-public class ItemStackComponent implements ItemComponent
+import java.util.Map;
+
+public class ItemStackComponent extends ItemComponent
 {
     private final String name;
     private final Material material;
@@ -16,6 +18,15 @@ public class ItemStackComponent implements ItemComponent
         this.name = name;
         this.material = material;
         this.modelData = modelData;
+    }
+
+    @Override
+    public Map<String, Class<?>> configValues() {
+        return Map.ofEntries(
+            Map.entry("displayName", String.class),
+            Map.entry("material", String.class),
+            Map.entry("modelData", Integer.class)
+        );
     }
 
     @Override

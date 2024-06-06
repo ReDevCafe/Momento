@@ -12,9 +12,21 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.momento.Data.MomentoKeys;
+import org.momento.Features.Item.Component.Data.DurabilityComponent;
+import org.momento.Features.Item.Component.Logical.DurabilityUpdate;
+import org.momento.Features.Item.Item;
+import org.momento.Features.Item.ItemLogic;
+import org.momento.Momento;
 
 import java.util.Arrays;
+
 public class PlayerShieldBlock implements Listener {
+
+    private final ItemLogic durabilitySystem;
+
+    public PlayerShieldBlock() {
+        this.durabilitySystem = new DurabilityUpdate();
+    }
 
     @EventHandler
     public void onPlayerBlock(EntityDamageByEntityEvent event) {
@@ -31,29 +43,17 @@ public class PlayerShieldBlock implements Listener {
             shield = equipment.getItemInOffHand();
         else return;
 
-        ItemMeta meta = shield.getItemMeta();
-        assert meta != null;
+        ItemMeta shieldMeta = shield.getItemMeta();
+        assert shieldMeta != null;
+        PersistentDataContainer dataContainer = shieldMeta.getPersistentDataContainer();
 
-        PersistentDataContainer data = meta.getPersistentDataContainer();
-        if (!data.has(MomentoKeys.DURABILITY, PersistentDataType.LONG)) return;
+        Item momentoItem = Momento.items.getItem(dataContainer.get(MomentoKeys.SIGNATURE, PersistentDataType.STRING));
+        if(momentoItem == null) return;
 
-        long durability = data.get(MomentoKeys.DURABILITY, PersistentDataType.LONG);
-        long maxDurability = data.get(MomentoKeys.MAX_DURABILITY, PersistentDataType.LONG);
-        int duraEnch = meta.getEnchants().getOrDefault(Enchantment.DURABILITY, 0);
-
-        if (duraEnch > 0) {
-            if (Math.random() < (100.0 / (duraEnch + 1)) / 100.0)
-                durability--;
-        } else
-            durability--;
-
-        data.set(MomentoKeys.DURABILITY, PersistentDataType.LONG, durability);
-        meta.setLore(Arrays.asList("", "§fDurability: "+durability + " / " + maxDurability));
-        shield.setItemMeta(meta);
+        Boolean broken = durabilitySystem.run(momentoItem, shield);
+        if (Boolean.TRUE.equals(broken))
+            player.getInventory().remove(shield);
 
         event.setCancelled(true);
-
-        if (durability > 0) return;
-        player.getInventory().remove(shield);
     }
 }

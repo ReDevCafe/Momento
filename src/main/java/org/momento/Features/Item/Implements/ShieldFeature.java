@@ -4,8 +4,8 @@ import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
-import org.momento.Features.Item.Component.DurabilityComponent;
-import org.momento.Features.Item.Component.ItemStackComponent;
+import org.momento.Features.Item.Component.Data.DurabilityComponent;
+import org.momento.Features.Item.Component.Data.ItemStackComponent;
 import org.momento.Features.Item.Item;
 import org.momento.Momento;
 
