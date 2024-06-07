@@ -26,6 +26,8 @@ public class Item implements Serializable {
         initComponents();
 
         ItemMeta meta = itemStack.getItemMeta();
+        assert meta != null;
+
         meta.getPersistentDataContainer().set(
                 MomentoKeys.SIGNATURE,
                 PersistentDataType.STRING, uuid
