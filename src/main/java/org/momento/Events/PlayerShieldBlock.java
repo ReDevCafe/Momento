@@ -47,13 +47,14 @@ public class PlayerShieldBlock implements Listener {
         assert shieldMeta != null;
         PersistentDataContainer dataContainer = shieldMeta.getPersistentDataContainer();
 
-        Item momentoItem = Momento.items.getItem(dataContainer.get(MomentoKeys.SIGNATURE, PersistentDataType.STRING));
+        Item momentoItem = Momento.items.items.get(dataContainer.get(MomentoKeys.SIGNATURE, PersistentDataType.STRING));
         if(momentoItem == null) return;
 
         Boolean broken = durabilitySystem.run(momentoItem, shield);
-        if (Boolean.TRUE.equals(broken))
-            player.getInventory().remove(shield);
-
         event.setCancelled(true);
+
+        if (!Boolean.TRUE.equals(broken)) return;
+        player.getInventory().remove(shield);
+        Momento.items.items.remove(momentoItem.getUuid());
     }
 }

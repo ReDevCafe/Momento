@@ -5,24 +5,20 @@ import org.momento.Momento;
 import java.io.*;
 import java.util.HashMap;
 
-public class ItemFile
-{
+public class ItemFile {
     public final HashMap<String, Item> items;
 
-    public ItemFile()
-    {
+    public ItemFile() {
         HashMap<String, Item> i = loadItems();
 
-        if(i == null)
+        if (i == null)
             items = new HashMap<>();
 
         else items = i;
     }
 
-    public void saveItems()
-    {
-        try
-        {
+    public void saveItems() {
+        try {
             File dataFolder = Momento.plugin.getDataFolder();
             File file = new File(dataFolder, "items.bin");
 
@@ -32,8 +28,7 @@ public class ItemFile
             objectOutputStream.close();
             fileOutputStream.close();
 
-        } catch (IOException e)
-        {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -64,18 +59,5 @@ public class ItemFile
         }
 
         return hashMap;
-    }
-
-    public void signItem(String uuid, Item item)
-    {
-        items.put(uuid, item);
-
-        // DEBUG
-        System.out.println(items);
-    }
-
-    public Item getItem(String uuid)
-    {
-        return items.get(uuid);
     }
 }

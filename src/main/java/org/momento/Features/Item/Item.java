@@ -35,7 +35,7 @@ public class Item implements Serializable {
 
         itemStack.setItemMeta(meta);
 
-        Momento.items.signItem(uuid, this);
+        Momento.items.items.put(uuid, this);
     }
 
     private void initComponents()
