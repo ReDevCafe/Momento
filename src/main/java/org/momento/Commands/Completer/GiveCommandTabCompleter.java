@@ -3,7 +3,7 @@ package org.momento.Commands.Completer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.momento.Features.Implements.ShieldFeature;
+import org.momento.Features.Item.Implements.ShieldFeature;
 import org.momento.Momento;
 
 import java.util.ArrayList;

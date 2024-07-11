@@ -1,6 +1,7 @@
 package org.momento;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.*;
@@ -8,11 +9,13 @@ import org.momento.Commands.Completer.GiveCommandTabCompleter;
 import org.momento.Commands.GiveCommand;
 import org.momento.Events.*;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.momento.Features.Implements.ShieldFeature;
+import org.momento.Features.Item.Implements.ShieldFeature;
+import org.momento.Features.Item.ItemFile;
 
 public final class Momento extends JavaPlugin {
 
     public static FileConfiguration config;
+    public static ItemFile items;
     public static Plugin plugin;
 
     //TODO: put pluginManager and getCommand somewhere else
@@ -21,6 +24,7 @@ public final class Momento extends JavaPlugin {
         saveDefaultConfig();
         config = getConfig();
         plugin = this;
+        items = new ItemFile();
 
         ShieldFeature.populateShields();
 
@@ -37,6 +41,6 @@ public final class Momento extends JavaPlugin {
 
     @Override
     public void onDisable() {
-
+        items.saveItems(); // if server crash I guess everything will be rollback (I hope not)
     }
 }

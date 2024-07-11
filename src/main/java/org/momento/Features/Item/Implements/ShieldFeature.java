@@ -1,15 +1,20 @@
-package org.momento.Features.Implements;
+package org.momento.Features.Item.Implements;
 
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
-import org.momento.Features.ItemFeature;
+import org.momento.Features.Item.Component.Data.DurabilityComponent;
+import org.momento.Features.Item.Component.Data.ItemStackComponent;
+import org.momento.Features.Item.Item;
 import org.momento.Momento;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+
+//TODO: Rework the way we handle items in the config to have a all in one function for this shit
 public class ShieldFeature {
     public static Map<String, ItemStack> shieldList = new HashMap<>();
 
@@ -25,7 +30,10 @@ public class ShieldFeature {
         long durability = shieldData.getLong("durability");
         int modelDataId = shieldData.getInt("modelData");
 
-        return new ItemFeature(displayName,Material.SHIELD , durability, modelDataId).createItem();
+        return new Item(Arrays.asList(
+                new ItemStackComponent(displayName, Material.SHIELD, modelDataId),
+                new DurabilityComponent(durability)
+        )).getItemStack();
     }
 
     public static void populateShields() {

@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.momento.Features.Implements.ShieldFeature;
+import org.momento.Features.Item.Implements.ShieldFeature;
 import org.momento.Momento;
 
 
