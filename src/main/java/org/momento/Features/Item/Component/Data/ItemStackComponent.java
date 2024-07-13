@@ -23,7 +23,7 @@ public class ItemStackComponent extends ItemComponent
         this.material = Material.getMaterial(section.getString("material"));
         if(this.material == null) this.material = Material.STONE;
 
-        this.modelData = section.getInt("model-data");
+        this.modelData = section.getInt("model-data", -1);
     }
 
     @Override

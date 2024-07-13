@@ -14,5 +14,9 @@ chat:
 
 items:
   dirt_shield:
+    ItemStack:
+      name: "dirt shield"
+      material: "SHIELD"
+      model-data: 1
     Durability:
-      durability: 10000
+      durability: 1

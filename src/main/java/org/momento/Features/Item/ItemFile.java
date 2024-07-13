@@ -20,7 +20,15 @@ public class ItemFile {
     public void saveItems() {
         try {
             File dataFolder = Momento.plugin.getDataFolder();
+            if (!dataFolder.exists()) {
+                System.out.println("Data folder does not exist!");
+                dataFolder.mkdirs();
+            }
+
             File file = new File(dataFolder, "items.bin");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
 
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
