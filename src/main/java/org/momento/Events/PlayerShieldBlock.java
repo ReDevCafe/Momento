@@ -1,7 +1,6 @@
 package org.momento.Events;
 
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,13 +11,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.momento.Data.MomentoKeys;
-import org.momento.Features.Item.Component.Data.DurabilityComponent;
 import org.momento.Features.Item.Component.Logical.DurabilityUpdate;
 import org.momento.Features.Item.Item;
 import org.momento.Features.Item.ItemLogic;
 import org.momento.Momento;
-
-import java.util.Arrays;
 
 public class PlayerShieldBlock implements Listener {
 

@@ -1,25 +1,19 @@
 package org.momento.Features.Item.Component.Data;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.momento.Features.Item.ItemComponent;
-
-import java.util.Map;
 
 public class DurabilityComponent extends ItemComponent
 {
     public long durability;
     public long maxDurability;
 
-    public DurabilityComponent(long maxDurability)
-    {
-        this.durability = this.maxDurability = maxDurability;
-    }
+    public DurabilityComponent() {}
 
     @Override
-    public Map<String, Class<?>> configValues() {
-        return Map.ofEntries(
-            Map.entry("durability", long.class)
-        );
+    public void param(ConfigurationSection section) {
+        this.durability = this.maxDurability = section.getLong("durability");   
     }
 
     @Override

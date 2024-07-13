@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.momento.Features.Item.Implements.ShieldFeature;
+import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Momento;
 
 
@@ -28,7 +28,7 @@ public class GiveCommand implements CommandExecutor {
         String shieldName = args[1];
 
         try {
-            ItemStack shield = ShieldFeature.shieldList.get(shieldName);
+            ItemStack shield = ItemFactory.itemsList.get(shieldName);
             player.getInventory().addItem(shield);
             player.sendMessage("You've been given " + shieldName);
         } catch (Exception e) {

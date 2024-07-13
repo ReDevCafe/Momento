@@ -33,6 +33,7 @@ public class ItemFile {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Item> loadItems() {
         HashMap<String, Item> hashMap = null;
         try {
@@ -53,7 +54,6 @@ public class ItemFile {
             objectInputStream.close();
             fileInputStream.close();
 
-            System.out.println("HashMap has been deserialized from " + file.getAbsolutePath());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }

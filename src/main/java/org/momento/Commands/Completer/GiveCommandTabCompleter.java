@@ -3,7 +3,7 @@ package org.momento.Commands.Completer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.momento.Features.Item.Implements.ShieldFeature;
+import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Momento;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class GiveCommandTabCompleter implements TabCompleter
                 break;
             case 2:
             {
-                completions.addAll(ShieldFeature.shieldList.keySet());
+                completions.addAll(ItemFactory.itemsList.keySet());
                 break;
             }
         }
