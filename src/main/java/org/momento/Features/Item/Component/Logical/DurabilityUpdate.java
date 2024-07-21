@@ -10,6 +10,7 @@ import org.momento.Features.Item.ItemLogic;
 import java.util.Arrays;
 
 public class DurabilityUpdate implements ItemLogic {
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T run(Item item, ItemStack stack) {
         DurabilityComponent durabilityComponent = item.findComponentByType(DurabilityComponent.class);

@@ -12,8 +12,11 @@ chat:
     "oh no ur ip": "\n\n\n\n\n\n\uE102\n"
     "ratio plus pas lu": "\n\n\n\n\n\n\uE103\n"
 
-shields:
+items:
   dirt_shield:
-    "displayName": "§dDirt shield"
-    "durability": 1
-    "modelData": 1
+    ItemStack:
+      name: "dirt shield"
+      material: "SHIELD"
+      model-data: 1
+    Durability:
+      durability: 1

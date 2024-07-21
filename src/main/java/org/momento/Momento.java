@@ -1,16 +1,16 @@
 package org.momento;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.*;
 import org.momento.Commands.Completer.GiveCommandTabCompleter;
+import org.momento.Data.ComponentRegistry;
 import org.momento.Commands.GiveCommand;
 import org.momento.Events.*;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.momento.Features.Item.Implements.ShieldFeature;
 import org.momento.Features.Item.ItemFile;
+import org.momento.Features.Item.Implements.ItemFactory;
 
 public final class Momento extends JavaPlugin {
 
@@ -26,7 +26,8 @@ public final class Momento extends JavaPlugin {
         plugin = this;
         items = new ItemFile();
 
-        ShieldFeature.populateShields();
+        ComponentRegistry.init();
+        ItemFactory.populateItems();
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new ChatSystem(), this);

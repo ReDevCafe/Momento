@@ -1,9 +1,6 @@
 package org.momento.Features.Item;
 
-import com.sun.jna.platform.win32.Guid;
-import org.bukkit.Bukkit;
-import org.bukkit.NamespacedKey;
-import org.bukkit.event.Listener;
+import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
@@ -23,7 +20,10 @@ public class Item implements Serializable {
     {
         this.objectComponent = objectComponent;
         this.uuid = UUID.randomUUID().toString();
+        this.itemStack = new ItemStack(Material.STONE);
+
         initComponents();
+
 
         ItemMeta meta = itemStack.getItemMeta();
         assert meta != null;

@@ -20,7 +20,15 @@ public class ItemFile {
     public void saveItems() {
         try {
             File dataFolder = Momento.plugin.getDataFolder();
+            if (!dataFolder.exists()) {
+                System.out.println("Data folder does not exist!");
+                dataFolder.mkdirs();
+            }
+
             File file = new File(dataFolder, "items.bin");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
 
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
@@ -33,6 +41,7 @@ public class ItemFile {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public HashMap<String, Item> loadItems() {
         HashMap<String, Item> hashMap = null;
         try {
@@ -53,7 +62,6 @@ public class ItemFile {
             objectInputStream.close();
             fileInputStream.close();
 
-            System.out.println("HashMap has been deserialized from " + file.getAbsolutePath());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
