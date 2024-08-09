@@ -13,6 +13,7 @@ chat:                           # for ur emojis and stickers:
   "sticker":                    
     "discord_sticker": "\uE102" # replace with ur unicode symbole
 
+# OUTDATED
 shields:                        # for ur shields items:
   shield_name:                  # like an id like minecraft:grass_block
     "displayName": "Cool shield"# set the name of ur shield
