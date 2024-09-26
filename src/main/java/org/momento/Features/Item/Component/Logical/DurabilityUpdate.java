@@ -20,13 +20,11 @@ public class DurabilityUpdate implements ItemLogic {
         if (shieldMeta == null) return null;
 
         int duraEnch = shieldMeta.getEnchants().getOrDefault(Enchantment.DURABILITY, 0);
-        if (duraEnch > 0) {
-            if (Math.random() < (100.0 / (duraEnch + 1)) / 100.0) {
+        if (duraEnch > 0) 
+            if (Math.random() < (100.0 / (duraEnch + 1)) / 100.0)
                 durabilityComponent.durability--;
-        }
-        } else {
+        else
             durabilityComponent.durability--;
-        }
 
         shieldMeta.setLore(Arrays.asList("", "§fDurability: " + durabilityComponent.durability + " / " + durabilityComponent.maxDurability));
         stack.setItemMeta(shieldMeta);

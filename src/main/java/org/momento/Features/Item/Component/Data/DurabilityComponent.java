@@ -8,6 +8,7 @@ public class DurabilityComponent extends ItemComponent
 {
     public long durability;
     public long maxDurability;
+    public Boolean emulatedDurability;
 
     public DurabilityComponent() {}
 
