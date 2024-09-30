@@ -21,8 +21,12 @@ public class DurabilityUpdate implements ItemLogic {
 
         int duraEnch = shieldMeta.getEnchants().getOrDefault(Enchantment.DURABILITY, 0);
         if (duraEnch > 0) 
+        {
             if (Math.random() < (100.0 / (duraEnch + 1)) / 100.0)
+            {
                 durabilityComponent.durability--;
+            }
+        }
         else
             durabilityComponent.durability--;
 

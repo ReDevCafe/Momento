@@ -7,7 +7,7 @@ Momento is a tool for servers that helps create items, emotes, and stickers (yes
 ## Configuration:
 
 in plugin config.yml:
-```
+```yaml
 chat:                           # Configuration for emojis and stickers
   emoji:                        # Emoji settings
     ":discord_emoji:": "\uE002" # Replace with your Unicode symbol
@@ -22,7 +22,7 @@ items:                          # Configuration for items
       material: "SHIELD"        # The initial material type
       model-data: 2             # Model data for the texture pack
     Durability:                 # Durability settings
-      durability: 10000         # Maximum durability of the item
+      value: 10000              # Maximum durability of the item
     WorkbenchCraft:             # Crafting table configuration
       id: "diamond_shield"      # Unique identifier for the item
       shape:                    # Crafting shape layout

@@ -13,7 +13,7 @@ public class DurabilityComponent extends ItemComponent
 
     @Override
     public void param(ConfigurationSection section) {
-        this.durability = this.maxDurability = section.getLong("durability");   
+        this.durability = this.maxDurability = section.getLong("value");   
     }
 
     @Override

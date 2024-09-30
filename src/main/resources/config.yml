@@ -34,19 +34,24 @@ items:
       material: "SHIELD"
       model-data: 1
     Durability:
-      durability: 10000
+      value: 10000
+    WorkbenchCraft:
+      id: "dirt_shield"
+      shape:
+        - "II "
+        - "III"
+        - " I "
+      ingredients:
+        I: "DIRT"
+        
   diamond_shield:
     ItemStack:
       name: "diamond shield"
       material: "SHIELD"
       model-data: 2
     Durability:
-      durability: 10000
+      value: 10000
     WorkbenchCraft:
       id: "diamond_shield"
-      shape:
-        - " I "
-        - "III"
-        - " I "
       ingredients:
         I: "DIAMOND"
