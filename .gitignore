@@ -2,3 +2,13 @@
 .vscode
 out
 target
+makefile 
+
+# minecraft stuffs
+versions
+cache
+libraries
+logs
+world
+eula.txt
+server.properties

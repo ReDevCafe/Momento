@@ -41,16 +41,13 @@ public class Item implements Serializable {
     private void initComponents()
     {
         for (ItemComponent itemComponent : objectComponent)
-        {
             itemStack = itemComponent.init(itemStack);
-        }
     }
 
     public <T extends ItemComponent> T findComponentByType(Class<T> type) {
         for (ItemComponent component : objectComponent) {
-            if (type.isInstance(component)) {
+            if (type.isInstance(component))
                 return type.cast(component);
-            }
         }
         return null;
     }

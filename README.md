@@ -1,26 +1,38 @@
 # Momento
+Momento is a tool for servers that helps create items, emotes, and stickers (yes, really). For certain aspects, like items, it uses an Entity Component System (ECS).
 
-![](https://github.com/MignonPetitXelow/Momento/blob/main/.assets/exa1.png)
+![](https://github.com/ReDevCafe/Momento/blob/main/.assets/exa1.png?raw=true)
+![](https://github.com/ReDevCafe/Momento/blob/main/.assets/exa3.png?raw=true)
 
 ## Configuration:
 
 in plugin config.yml:
-```yml
-chat:                           # for ur emojis and stickers:
-  "emoji":
-    ":discord_emoji:": "\uE002" # replace with ur unicode symbole
+```yaml
+chat:                           # Configuration for emojis and stickers
+  emoji:                        # Emoji settings
+    ":discord_emoji:": "\uE002" # Replace with your Unicode symbol
     
-  "sticker":                    
-    "discord_sticker": "\uE102" # replace with ur unicode symbole
+  sticker:                      # Sticker settings
+    discord_sticker: "\uE102"   # Replace with your Unicode symbol
 
-items:
-  dirt_shield:
-    ItemStack:
-      name: "dirt shield"
-      material: "SHIELD"
-      model-data: 1
-    Durability:
-      durability: 10000
+items:                          # Configuration for items
+  item_name:                  
+    ItemStack:                  # Definition of the item stack
+      name: "diamond shield"    # The display name of the item
+      material: "SHIELD"        # The initial material type
+      model-data: 2             # Model data for the texture pack
+    Durability:                 # Durability settings
+      value: 10000              # Maximum durability of the item
+    WorkbenchCraft:             # Crafting table configuration
+      id: "diamond_shield"      # Unique identifier for the item
+      shape:                    # Crafting shape layout
+        - " A "               
+        - "BCB"
+        - " A "
+      ingredients:              # Ingredients required for crafting
+        A: "DIAMOND"  
+        B: "COAL"
+        C: "SHIELD"
 ```
 
 ## Texture pack side
@@ -53,7 +65,7 @@ ${texturepack_folder}/assets/minecraft/font/include/default.json
 ```bash
 ${texturepack_folder}/assets/minecraft/textures/font/custom/emojis/
 ```
-![](https://github.com/MignonPetitXelow/Momento/blob/main/.assets/exa2.png)
+![](https://github.com/ReDevCafe/Momento/blob/main/.assets/exa2.png?raw=true)
 
 ### Shields:
 It's a bit challenging, but you'll need to replace the shield override with a predicate check for the custom model data ('modelData' value in the Momento config) within:

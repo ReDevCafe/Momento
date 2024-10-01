@@ -11,7 +11,7 @@ public class ItemStackComponent extends ItemComponent
 {
     private String name;
     private Material material;
-    private  int modelData;
+    private int modelData;
 
     public ItemStackComponent() {}
 

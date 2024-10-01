@@ -15,9 +15,9 @@ import org.momento.Features.Item.ItemComponent;
 public class ItemFactory {
     public static Map<String, ItemStack> itemsList = new HashMap<>();
 
-    public static ItemStack getItemFromConfig(String shieldName, ConfigurationSection config) {
-        ConfigurationSection itemData = config.getConfigurationSection(shieldName.replace(" ", "_").toLowerCase());
-        if (itemData == null) return null;
+    public static ItemStack getItemFromConfig(String itemName, ConfigurationSection config) {
+        ConfigurationSection itemData = config.getConfigurationSection(itemName.replace(" ", "_").toLowerCase());
+        if (itemData == null) throw new IllegalStateException("Item " + itemName + " is not configured");
 
         List<ItemComponent> cmpList = new ArrayList<>(); 
 
@@ -45,12 +45,11 @@ public class ItemFactory {
         ConfigurationSection itConfig = Momento.config.getConfigurationSection("items");
         if (itConfig == null) return;
         
-        for (String shieldName : itConfig.getKeys(false)) {
-            ItemStack shield = getItemFromConfig(shieldName, itConfig);
+        for (String itemName : itConfig.getKeys(false)) {
+            ItemStack item = getItemFromConfig(itemName, itConfig);
 
-            if (shield != null) {
-                itemsList.put(shieldName, shield);
-            }
+            if (item == null) throw new IllegalStateException("Item " + itemName + " is not in configuration (what?)");
+            itemsList.put(itemName, item);
         }
     }
 }
