@@ -1,11 +1,16 @@
 package org.momento.Features.Item;
 
-import org.momento.Momento;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
-public class ItemFile {
+import org.momento.Momento;
+
+public final class ItemFile {
     public final HashMap<String, Item> items;
 
     public ItemFile() {
@@ -30,11 +35,12 @@ public class ItemFile {
                 file.createNewFile();
             }
 
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(items);
-            objectOutputStream.close();
-            fileOutputStream.close();
+            try (   
+                    FileOutputStream fileOutputStream = new FileOutputStream(file); 
+                    ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)
+                ) {
+                objectOutputStream.writeObject(items);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,15 +58,13 @@ public class ItemFile {
             }
 
             File file = new File(dataFolder, "items.bin");
-            if (!file.exists()) {
+            if (!file.exists())
                 file.createNewFile();
-            }
+            
 
-            FileInputStream fileInputStream = new FileInputStream(file);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            hashMap = (HashMap<String, Item>) objectInputStream.readObject();
-            objectInputStream.close();
-            fileInputStream.close();
+            try (FileInputStream fileInputStream = new FileInputStream(file); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+                hashMap = (HashMap<String, Item>) objectInputStream.readObject();
+            }
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

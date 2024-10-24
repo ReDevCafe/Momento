@@ -1,5 +1,9 @@
 package org.momento.Features.Item;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -7,16 +11,12 @@ import org.bukkit.persistence.PersistentDataType;
 import org.momento.Data.MomentoKeys;
 import org.momento.Momento;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
-
 public class Item implements Serializable {
     private final List<? extends ItemComponent> objectComponent;
     private final String uuid;
     private transient ItemStack itemStack;
 
-    public Item(List<? extends ItemComponent> objectComponent)
+    public Item(List<? extends ItemComponent> objectComponent, String id)
     {
         this.objectComponent = objectComponent;
         this.uuid = UUID.randomUUID().toString();
@@ -31,6 +31,11 @@ public class Item implements Serializable {
         meta.getPersistentDataContainer().set(
                 MomentoKeys.SIGNATURE,
                 PersistentDataType.STRING, uuid
+        );
+
+        meta.getPersistentDataContainer().set(
+                MomentoKeys.PID,
+                PersistentDataType.STRING, id
         );
 
         itemStack.setItemMeta(meta);

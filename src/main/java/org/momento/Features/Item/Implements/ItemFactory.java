@@ -1,16 +1,16 @@
 package org.momento.Features.Item.Implements;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
-import org.momento.Momento;
 import org.momento.Data.ComponentRegistry;
 import org.momento.Features.Item.Item;
 import org.momento.Features.Item.ItemComponent;
+import org.momento.Momento;
 
 public class ItemFactory {
     public static Map<String, ItemStack> itemsList = new HashMap<>();
@@ -37,7 +37,7 @@ public class ItemFactory {
             }
         }
 
-        return new Item(cmpList).getItemStack();
+        return new Item(cmpList, itemName).getItemStack();
     }
 
     public static void populateItems() {

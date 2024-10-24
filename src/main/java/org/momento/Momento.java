@@ -4,11 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.*;
-import org.momento.Commands.Completer.GiveCommandTabCompleter;
 import org.momento.Data.ComponentRegistry;
-import org.momento.Commands.GiveCommand;
 import org.momento.Events.*;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.momento.Commands.Completer.MomCommandTabCompleter;
+import org.momento.Commands.MomCommand;
 import org.momento.Features.Item.ItemFile;
 import org.momento.Features.Item.Implements.ItemFactory;
 
@@ -36,8 +36,8 @@ public final class Momento extends JavaPlugin {
         pluginManager.registerEvents(new PlayerShieldBlock(), this);
 
         PluginCommand momentoCommand = getCommand("momento");
-        momentoCommand.setExecutor(new GiveCommand(this));
-        momentoCommand.setTabCompleter(new GiveCommandTabCompleter(this));
+        momentoCommand.setExecutor(new MomCommand(this));
+        momentoCommand.setTabCompleter(new MomCommandTabCompleter(this));
     }
 
     @Override

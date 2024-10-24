@@ -9,10 +9,10 @@ import org.momento.Momento;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GiveCommandTabCompleter implements TabCompleter
+public class MomCommandTabCompleter implements TabCompleter
 {
 
-    public GiveCommandTabCompleter(Momento plugin) {
+    public MomCommandTabCompleter(Momento plugin) {
     }
 
     @Override
@@ -21,6 +21,7 @@ public class GiveCommandTabCompleter implements TabCompleter
         switch (args.length) {
             case 1:
                 completions.add("give");
+                completions.add("compare");
                 break;
             case 2:
             {

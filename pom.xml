@@ -46,6 +46,9 @@
         <directory>src/main/resources</directory>
         <filtering>true</filtering>
       </resource>
+      <resource> 
+        <directory>src/main/java/</directory>
+      </resource>
     </resources>
   </build>
 

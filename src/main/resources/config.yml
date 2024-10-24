@@ -28,6 +28,11 @@ chat:
     "ratio plus pas lu": "\n\n\n\n\n\n\uE103\n"
 
 items:
+  gaymond:
+    ItemStack:
+      name: "gaymond"
+      material: "GOLD_INGOT"
+      model-data: 0
   dirt_shield:
     ItemStack:
       name: "dirt shield"
@@ -51,7 +56,3 @@ items:
       model-data: 2
     Durability:
       value: 10000
-    WorkbenchCraft:
-      id: "diamond_shield"
-      ingredients:
-        I: "DIAMOND"
