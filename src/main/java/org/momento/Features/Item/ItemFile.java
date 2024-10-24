@@ -12,6 +12,11 @@ import org.momento.Momento;
 
 public final class ItemFile {
     public final HashMap<String, Item> items;
+    /*
+    Coucou Ame du future, je sais que tu lis ca en ayant oublier cet notes,
+    MAIS Tu es debile. si tu viens pour voir pourquoi ca put pas dans la list juste au dessus les items qui sont give /craft,
+    C'EST TRES SIMPLE, tu as juste oublier de register l'item bouffonne. Sur-ce gros bisous <333 
+    */
 
     public ItemFile() {
         HashMap<String, Item> i = loadItems();

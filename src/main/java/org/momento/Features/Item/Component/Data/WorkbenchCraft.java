@@ -25,7 +25,7 @@ public class WorkbenchCraft extends ItemComponent {
     public void param(ConfigurationSection section) {
         materials = new java.util.HashMap<>();
         ConfigurationSection ingredientSection = section.getConfigurationSection("ingredients");
-        
+
         if (ingredientSection == null)
             throw new IllegalStateException("No ingredients");
 
@@ -60,6 +60,7 @@ public class WorkbenchCraft extends ItemComponent {
     @Override
     public ItemStack init(ItemStack itemStack) {
         NamespacedKey key = new NamespacedKey(Momento.plugin, "recipe_" + craftId);
+
         if (shapped) {
             ShapedRecipe recipe = new ShapedRecipe(key, itemStack);
             recipe.shape(shape);
@@ -80,6 +81,7 @@ public class WorkbenchCraft extends ItemComponent {
             for (Map.Entry<Character, AbstractMap.SimpleEntry<ItemStack, Boolean>> entry : materials.entrySet()) 
             {
                 ItemStack stack = entry.getValue().getKey();
+
                 if(entry.getValue().getValue())
                     recipe.addIngredient(new ExactChoice(stack));
                 else recipe.addIngredient(stack.getType());
@@ -88,5 +90,10 @@ public class WorkbenchCraft extends ItemComponent {
             Momento.plugin.getServer().addRecipe(recipe);
         }
         return itemStack;
+    }
+
+    @Override
+    public Boolean Serializable() {
+        return false;  // will not be added to the save binary
     }
 }

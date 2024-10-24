@@ -20,4 +20,12 @@ public class DurabilityComponent extends ItemComponent
     public ItemStack init(ItemStack itemStack) {
         return itemStack;
     }
+
+    @Override
+    public String toString() {
+        return "§dDurability §6{" +
+                "\n§b   durability§6: §c" + durability +
+                "\n§b   maxDurability§6: §c" + maxDurability +
+                "\n§6}";
+    }
 }

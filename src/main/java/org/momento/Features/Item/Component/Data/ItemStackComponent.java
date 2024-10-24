@@ -1,5 +1,6 @@
 package org.momento.Features.Item.Component.Data;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
@@ -31,15 +32,24 @@ public class ItemStackComponent extends ItemComponent
     {
         if(name == null || material.isAir()) return itemStack;
         
-        itemStack = new ItemStack(material);
+        itemStack.setType(material);
 
         ItemMeta itemMeta = itemStack.getItemMeta();
         assert itemMeta != null;
 
-        itemMeta.setDisplayName("§r"+name);
+        itemMeta.setDisplayName(ChatColor.RESET+name);
         itemMeta.setCustomModelData(modelData);
 
         itemStack.setItemMeta(itemMeta);
         return itemStack;
+    }
+
+    @Override
+    public String toString() {
+        return "§dItemStack §6{" +
+                "\n§b   name§6: §c" + name +
+                "\n§b   material§6: §c" + material.toString() +
+                "\n§b   modelData§6: §c" + modelData +
+                "\n§6}";
     }
 }

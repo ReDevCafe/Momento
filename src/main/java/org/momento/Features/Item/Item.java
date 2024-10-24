@@ -20,10 +20,8 @@ public class Item implements Serializable {
     {
         this.objectComponent = objectComponent;
         this.uuid = UUID.randomUUID().toString();
+        
         this.itemStack = new ItemStack(Material.STONE);
-
-        initComponents();
-
 
         ItemMeta meta = itemStack.getItemMeta();
         assert meta != null;
@@ -36,9 +34,10 @@ public class Item implements Serializable {
         meta.getPersistentDataContainer().set(
                 MomentoKeys.PID,
                 PersistentDataType.STRING, id
-        );
+        );  
 
         itemStack.setItemMeta(meta);
+        initComponents();
 
         Momento.items.items.put(uuid, this);
     }

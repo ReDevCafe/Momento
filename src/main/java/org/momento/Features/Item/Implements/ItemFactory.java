@@ -31,7 +31,9 @@ public class ItemFactory {
             try {
                 ItemComponent component = componentClass.getDeclaredConstructor().newInstance();
                 component.param(componentSection);
-                cmpList.add(component);         
+
+                if(component.Serializable()) cmpList.add(component); 
+
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -1,13 +1,15 @@
 package org.momento.Commands.Completer;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
+import org.momento.Data.ComponentRegistry;
 import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Momento;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MomCommandTabCompleter implements TabCompleter
 {
@@ -20,12 +22,25 @@ public class MomCommandTabCompleter implements TabCompleter
         List<String> completions = new ArrayList<>();
         switch (args.length) {
             case 1:
-                completions.add("give");
-                completions.add("compare");
+                completions.addAll(Arrays.asList("give", "compare", "get", "binaries"));
                 break;
             case 2:
             {
-                completions.addAll(ItemFactory.itemsList.keySet());
+                switch(args[0])
+                {
+                    case "give":
+                    case "compare":
+                        completions.addAll(ItemFactory.itemsList.keySet());
+                        break;
+
+                    case "get":
+                        completions.addAll(ComponentRegistry.registry().keySet());
+                        break;
+
+                    case "binaries":
+                        completions.addAll(Arrays.asList("item"));
+                        break;
+                }
                 break;
             }
         }
