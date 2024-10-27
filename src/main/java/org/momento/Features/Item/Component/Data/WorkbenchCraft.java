@@ -14,6 +14,8 @@ import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Features.Item.ItemComponent;
 import org.momento.Momento;
 
+import org.bukkit.craftbukkit.v1_20_R3.inventory.CraftRecipe;
+
 public class WorkbenchCraft extends ItemComponent {
 
     private String craftId;

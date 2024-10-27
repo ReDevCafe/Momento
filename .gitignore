@@ -12,3 +12,6 @@ logs
 world
 eula.txt
 server.properties
+
+# maven stuffs
+dependency-reduced-pom.xml
