@@ -1,15 +1,15 @@
 package org.momento.Features.Item;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 import org.momento.Data.MomentoKeys;
 import org.momento.Momento;
-
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
 
 public class Item implements Serializable {
     private final List<? extends ItemComponent> objectComponent;
@@ -37,7 +37,7 @@ public class Item implements Serializable {
 
         Momento.items.items.put(uuid, this);
     }
-
+    
     private void initComponents()
     {
         for (ItemComponent itemComponent : objectComponent)
