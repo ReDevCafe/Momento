@@ -3,14 +3,20 @@ package org.momento;
 import org.bukkit.Bukkit;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.*;
-import org.momento.Commands.Completer.GiveCommandTabCompleter;
-import org.momento.Data.ComponentRegistry;
-import org.momento.Commands.GiveCommand;
-import org.momento.Events.*;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.momento.Features.Item.ItemFile;
+import org.momento.Commands.Completer.GiveCommandTabCompleter;
+import org.momento.Commands.GiveCommand;
+import org.momento.Data.BlockComponentRegistry;
+import org.momento.Data.ItemComponentRegistry;
+import org.momento.Events.AnvilRename;
+import org.momento.Events.ChatSystem;
+import org.momento.Events.PlayerShieldBlock;
+import org.momento.Events.SignEvent;
+import org.momento.Features.Block.BlockFactory;
 import org.momento.Features.Item.Implements.ItemFactory;
+import org.momento.Features.Item.ItemFile;
 
 public final class Momento extends JavaPlugin {
 
@@ -26,7 +32,10 @@ public final class Momento extends JavaPlugin {
         plugin = this;
         items = new ItemFile();
 
-        ComponentRegistry.init();
+        BlockComponentRegistry.init();
+        BlockFactory.populateBlocks();
+
+        ItemComponentRegistry.init();
         ItemFactory.populateItems();
 
         PluginManager pluginManager = Bukkit.getPluginManager();

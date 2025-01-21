@@ -1,21 +1,21 @@
 package org.momento.Features.Item.Implements;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
-import org.momento.Momento;
-import org.momento.Data.ComponentRegistry;
+import org.momento.Data.ItemComponentRegistry;
 import org.momento.Features.Item.Item;
 import org.momento.Features.Item.ItemComponent;
+import org.momento.Momento;
 
 public class ItemFactory {
-    public static Map<String, ItemStack> itemsList = new HashMap<>();
+    public static Map<String, ItemStack> itemsList;
 
-    public static ItemStack getItemFromConfig(String shieldName, ConfigurationSection config) {
+    protected static ItemStack getItemFromConfig(String shieldName, ConfigurationSection config) {
         ConfigurationSection itemData = config.getConfigurationSection(shieldName.replace(" ", "_").toLowerCase());
         if (itemData == null) return null;
 
@@ -25,7 +25,7 @@ public class ItemFactory {
             ConfigurationSection componentSection = itemData.getConfigurationSection(key);
             if (componentSection == null) continue;
 
-            Class<? extends ItemComponent> componentClass = ComponentRegistry.registry().get(key);
+            Class<? extends ItemComponent> componentClass = ItemComponentRegistry.registry().get(key);
             if (componentClass == null) continue;
 
             try {
