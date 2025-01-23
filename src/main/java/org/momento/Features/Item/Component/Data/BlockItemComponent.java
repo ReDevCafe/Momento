@@ -12,9 +12,7 @@ public class BlockItemComponent extends ItemComponent {
 
     public Block block;
 
-    
     public BlockItemComponent() {}
-
     @Override
     public ItemStack init(ItemStack itemStack) {
         itemStack.setType(Material.END_PORTAL);
@@ -33,7 +31,7 @@ public class BlockItemComponent extends ItemComponent {
         String identifier = section.getString("identifier"); 
         if (identifier == null) throw new IllegalStateException("Invalid identifier, missing identifier");
 
-        Block gBlock = BlockFactory.blockList.get(identifier);
+        Block gBlock = BlockFactory.blocksList.get(identifier);
         if (gBlock == null) throw new IllegalStateException("Block not found for identifier: " + identifier);
         block = gBlock;
     }

@@ -15,6 +15,7 @@ import org.momento.Events.ChatSystem;
 import org.momento.Events.PlayerShieldBlock;
 import org.momento.Events.SignEvent;
 import org.momento.Features.Block.BlockFactory;
+import org.momento.Features.Block.BlockFile;
 import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Features.Item.ItemFile;
 
@@ -22,6 +23,7 @@ public final class Momento extends JavaPlugin {
 
     public static FileConfiguration config;
     public static ItemFile items;
+    public static BlockFile blocks;
     public static Plugin plugin;
 
     //TODO: put pluginManager and getCommand somewhere else
@@ -31,6 +33,7 @@ public final class Momento extends JavaPlugin {
         config = getConfig();
         plugin = this;
         items = new ItemFile();
+        blocks = new BlockFile();
 
         BlockComponentRegistry.init();
         BlockFactory.populateBlocks();
@@ -52,5 +55,6 @@ public final class Momento extends JavaPlugin {
     @Override
     public void onDisable() {
         items.saveItems(); // if server crash I guess everything will be rollback (I hope not)
+        blocks.saveBlocks(); // if server crash I guess everything will be rollback (I hope not)
     }
 }

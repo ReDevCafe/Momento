@@ -1,17 +1,17 @@
 package org.momento.Features.Block.Component.Data;
 
 import org.bukkit.Material;
-import org.bukkit.block.data.BlockData;
+import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.momento.Features.Block.BlockComponent;
 
 public class BlockDataComponent extends BlockComponent {
 
-    public Material material;
+    private Material material;
 
     @Override
-    public BlockData init(BlockData blockData) {
-        blockData.createBlockState().setType(material);
+    public Block init(Block blockData) {
+        blockData.setType(material);
 
         return blockData;
     }

@@ -10,7 +10,7 @@ import org.momento.Data.BlockComponentRegistry;
 import org.momento.Momento;
 
 public class BlockFactory {
-    public static Map<String, Block> blockList;
+    public static Map<String, Block> blocksList;
 
     protected static Block getBlockFromConfig(String blockName, ConfigurationSection config) {
         ConfigurationSection blockData = config.getConfigurationSection(blockName.replace(" ", "_").toLowerCase());
@@ -39,7 +39,7 @@ public class BlockFactory {
     }
 
     public static void populateBlocks(){
-        blockList = new HashMap<>();
+        blocksList = new HashMap<>();
         ConfigurationSection blConfig = Momento.config.getConfigurationSection("blocks");
         if (blConfig == null) return;
 
@@ -47,7 +47,7 @@ public class BlockFactory {
             Block block = getBlockFromConfig(identifier, blConfig);
 
             if (block != null) {
-                blockList.put(identifier, block);
+                blocksList.put(identifier, block);
             }
         }
     }

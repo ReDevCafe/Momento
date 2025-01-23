@@ -35,7 +35,7 @@ public class BlockFile {
         else blocks = i;
     }
 
-    public void saveItems() {
+    public void saveBlocks() {
         try {
             File dataFolder = Momento.plugin.getDataFolder();
             if (!dataFolder.exists()) {

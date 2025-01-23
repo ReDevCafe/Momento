@@ -1,10 +1,13 @@
 package org.momento.Commands;
 
+import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.momento.Features.Block.Block;
+import org.momento.Features.Block.BlockFactory;
 import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Momento;
 
@@ -22,15 +25,44 @@ public class GiveCommand implements CommandExecutor {
             return true;
         }
 
-        if (args.length != 2) return false;
+        if (args.length < 2) return false;
 
         Player player = (Player) sender;
-        String shieldName = args[1];
+        String object = args[1];
 
         try {
-            ItemStack shield = ItemFactory.itemsList.get(shieldName);
-            player.getInventory().addItem(shield);
-            player.sendMessage("You've been given " + shieldName);
+            switch(args[0])
+            {
+                case "give":
+                    ItemStack item = ItemFactory.itemsList.get(object);
+                    player.getInventory().addItem(item);
+                    player.sendMessage("You've been given " + object);
+                    break;
+                case "setblock":
+                    if(args.length != 5) 
+                    {
+                        player.sendMessage("Usage: /mom setblock <block> <x> <y> <z>");
+                        break;
+                    }
+
+                    Block block = BlockFactory.blocksList.get(object);
+                    try {
+
+                        Location location = new Location(
+                            player.getWorld(), 
+                            Integer.parseInt(args[2]), 
+                            Integer.parseInt(args[3]), 
+                            Integer.parseInt(args[4])
+                        );
+
+                        block.clone(location);
+                        player.sendMessage("Block placed at " + location.toString());
+                    } catch (Exception e) {
+                    }
+                    
+                default:
+                    break;
+            }
         } catch (Exception e) {
             player.sendMessage("Object not found.");
         }

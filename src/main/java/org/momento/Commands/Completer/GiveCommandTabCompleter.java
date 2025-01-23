@@ -1,13 +1,14 @@
 package org.momento.Commands.Completer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.momento.Features.Item.Implements.ItemFactory;
+import org.momento.Features.Block.BlockFactory;
 import org.momento.Momento;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GiveCommandTabCompleter implements TabCompleter
 {
@@ -21,10 +22,19 @@ public class GiveCommandTabCompleter implements TabCompleter
         switch (args.length) {
             case 1:
                 completions.add("give");
+                completions.add("setblock");
                 break;
             case 2:
             {
-                completions.addAll(ItemFactory.itemsList.keySet());
+                switch(args[0])
+                {
+                    case "give":
+                        completions.addAll(ItemFactory.itemsList.keySet());
+                        break;
+                    case "setblock":
+                        completions.addAll(BlockFactory.blocksList.keySet());
+                        break;
+                }
                 break;
             }
         }
