@@ -15,15 +15,14 @@ public class BlockItemComponent extends ItemComponent {
 
     public BlockItemComponent() {}
     @Override
-    public ItemStack init(ItemStack itemStack) {
+    public ItemStack init(ItemStack itemStack) 
+    {
         itemStack.setType(Material.KNOWLEDGE_BOOK);
         
         ItemMeta meta = itemStack.getItemMeta();
         meta.setCustomModelData(modelData);
 
-        meta.setDisplayName("§rAAAAAAAAAAAAAAAAAAAAA");
         itemStack.setItemMeta(meta);
-
         return itemStack;
     }
 

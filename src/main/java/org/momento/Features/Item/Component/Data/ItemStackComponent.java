@@ -30,7 +30,6 @@ public class ItemStackComponent extends ItemComponent
     public ItemStack init(ItemStack itemStack)
     {
         if(name == null || material.isAir()) return itemStack;
-        
         itemStack = new ItemStack(material);
 
         ItemMeta itemMeta = itemStack.getItemMeta();

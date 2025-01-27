@@ -56,7 +56,7 @@ public class Block implements Serializable, Cloneable
             blockDisplay.setTransformation(new Transformation(
                 new Vector3f(.5f, .5f, .5f),
                 new Quaternionf(0, 0, 0, 1),
-                new Vector3f(1.01f, 1.01f, 1.01f),
+                new Vector3f(1.001f, 1.001f, 1.001f),
                 new Quaternionf(0,0,0,1)
             ));
             blockDisplay.setBrightness(new Brightness(4,15));
