@@ -11,16 +11,17 @@ import org.momento.Features.Item.ItemComponent;
 public class BlockItemComponent extends ItemComponent {
 
     public Block block;
+    private int modelData;
 
     public BlockItemComponent() {}
     @Override
     public ItemStack init(ItemStack itemStack) {
-        itemStack.setType(Material.END_PORTAL);
+        itemStack.setType(Material.KNOWLEDGE_BOOK);
         
         ItemMeta meta = itemStack.getItemMeta();
-        meta.setCustomModelData(1);
+        meta.setCustomModelData(modelData);
 
-        meta.setDisplayName("§r AAAAAAAAAAAAAAAAAAAAA");
+        meta.setDisplayName("§rAAAAAAAAAAAAAAAAAAAAA");
         itemStack.setItemMeta(meta);
 
         return itemStack;
@@ -34,5 +35,8 @@ public class BlockItemComponent extends ItemComponent {
         Block gBlock = BlockFactory.blocksList.get(identifier);
         if (gBlock == null) throw new IllegalStateException("Block not found for identifier: " + identifier);
         block = gBlock;
+
+        modelData = section.getInt("model-data", 0);
     }
+    
 }

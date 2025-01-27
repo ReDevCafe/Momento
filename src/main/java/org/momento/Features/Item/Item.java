@@ -24,7 +24,6 @@ public class Item implements Serializable {
 
         initComponents();
 
-
         ItemMeta meta = itemStack.getItemMeta();
         assert meta != null;
 
