@@ -14,6 +14,7 @@ import org.bukkit.util.Transformation;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.momento.Momento;
+import org.momento.Features.Item.ItemComponent;
 
 public class Block implements Serializable, Cloneable
 {
@@ -62,6 +63,7 @@ public class Block implements Serializable, Cloneable
             blockDisplay.setBrightness(new Brightness(4,15));
             blockDisplay.setBillboard(Billboard.FIXED);
             
+            clone.blockDisplay = blockDisplay;
             Momento.blocks.blocks.put(location, clone);
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,4 +78,17 @@ public class Block implements Serializable, Cloneable
         }
     }
 
+     public <T extends BlockComponent> T findComponentByType(Class<T> type) {
+        for (BlockComponent component : blockComponent) {
+            if (type.isInstance(component)) {
+                return type.cast(component);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String toString() {
+        return "[L=\""+location+"\", CS=\""+blockComponent.size()+"\",]";
+    }
 }

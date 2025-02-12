@@ -13,7 +13,7 @@ import org.momento.Momento;
 
 public class Item implements Serializable {
     private final List<? extends ItemComponent> objectComponent;
-    private final String uuid;
+    private String uuid;
     private transient ItemStack itemStack;
 
     public Item(List<? extends ItemComponent> objectComponent)
@@ -33,9 +33,27 @@ public class Item implements Serializable {
         );
 
         itemStack.setItemMeta(meta);
-
-        Momento.items.items.put(uuid, this);
     }
+
+    public Item copy()
+    {
+        Item newItem = new Item(this.objectComponent);
+        newItem.uuid = UUID.randomUUID().toString();
+        newItem.itemStack = this.itemStack.clone();
+    
+        ItemMeta meta = newItem.itemStack.getItemMeta();
+        assert meta != null;
+    
+        meta.getPersistentDataContainer().set(
+                MomentoKeys.SIGNATURE,
+                PersistentDataType.STRING, newItem.uuid
+        );
+    
+        newItem.itemStack.setItemMeta(meta);
+        Momento.items.items.put(newItem.uuid, newItem);
+        return newItem;
+    }
+    
     
     private void initComponents()
     {
@@ -60,5 +78,10 @@ public class Item implements Serializable {
 
     public String getUuid(){
         return uuid;
+    }
+
+    @Override
+    public String toString() {
+        return "[U=\""+uuid+"\", CS=\""+objectComponent.size()+"\",]";
     }
 }

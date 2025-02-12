@@ -9,12 +9,13 @@ import org.bukkit.inventory.ItemStack;
 import org.momento.Features.Block.Block;
 import org.momento.Features.Block.BlockFactory;
 import org.momento.Features.Item.Implements.ItemFactory;
+import org.momento.Features.Item.Item;
 import org.momento.Momento;
 
 
-public class GiveCommand implements CommandExecutor {
+public class MomentoCommand implements CommandExecutor {
 
-    public GiveCommand(Momento momento) {
+    public MomentoCommand(Momento momento) {
     }
 
     @Override
@@ -34,7 +35,7 @@ public class GiveCommand implements CommandExecutor {
             switch(args[0])
             {
                 case "give":
-                    ItemStack item = ItemFactory.itemsList.get(object);
+                    ItemStack item = ItemFactory.itemsList.get(object).copy().getItemStack();
                     player.getInventory().addItem(item);
                     player.sendMessage("You've been given " + object);
                     break;
@@ -59,7 +60,22 @@ public class GiveCommand implements CommandExecutor {
                         player.sendMessage("Block placed at " + location.toString());
                     } catch (Exception e) {
                     }
+                case "debug":
+                    switch (args[1])
+                    {
+                        case "list_i":
+                            for (Item mItem : Momento.items.items.values())
+                                player.sendMessage(mItem.toString());
                     
+                            break;
+                        case "list_b":
+                            for (Block mBlock : Momento.blocks.blocks.values()) 
+                                player.sendMessage(mBlock.toString());
+                        
+                            break;
+                        default:
+                            break;
+                    }
                 default:
                     break;
             }

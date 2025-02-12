@@ -1,19 +1,20 @@
 package org.momento.Commands.Completer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Features.Block.BlockFactory;
+import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Momento;
 
-public class GiveCommandTabCompleter implements TabCompleter
+public class MomentoCommandTabCompleter implements TabCompleter
 {
 
-    public GiveCommandTabCompleter(Momento plugin) {
+    public MomentoCommandTabCompleter(Momento plugin) {
     }
 
     @Override
@@ -21,8 +22,12 @@ public class GiveCommandTabCompleter implements TabCompleter
         List<String> completions = new ArrayList<>();
         switch (args.length) {
             case 1:
-                completions.add("give");
-                completions.add("setblock");
+                completions.addAll(Arrays.asList(
+                "give",
+                 "setblock", 
+                 "debug"
+                ));
+
                 break;
             case 2:
             {
@@ -33,6 +38,13 @@ public class GiveCommandTabCompleter implements TabCompleter
                         break;
                     case "setblock":
                         completions.addAll(BlockFactory.blocksList.keySet());
+                        break;
+                    case "debug":
+                        completions.addAll(Arrays.asList(
+                            // TODO: do a debuger feature
+                            "list_b",
+                            "list_i"
+                        ));
                         break;
                 }
                 break;

@@ -6,16 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.inventory.ItemStack;
 import org.momento.Data.ItemComponentRegistry;
 import org.momento.Features.Item.Item;
 import org.momento.Features.Item.ItemComponent;
 import org.momento.Momento;
 
 public class ItemFactory {
-    public static Map<String, ItemStack> itemsList;
+    public static Map<String, Item> itemsList;
 
-    protected static ItemStack getItemFromConfig(String shieldName, ConfigurationSection config) {
+    protected static Item getItemFromConfig(String shieldName, ConfigurationSection config) {
         ConfigurationSection itemData = config.getConfigurationSection(shieldName.replace(" ", "_").toLowerCase());
         if (itemData == null) return null;
 
@@ -37,7 +36,7 @@ public class ItemFactory {
             }
         }
 
-        return new Item(cmpList).getItemStack();
+        return new Item(cmpList);
     }
 
     public static void populateItems() {
@@ -45,11 +44,11 @@ public class ItemFactory {
         ConfigurationSection itConfig = Momento.config.getConfigurationSection("items");
         if (itConfig == null) return;
         
-        for (String shieldName : itConfig.getKeys(false)) {
-            ItemStack shield = getItemFromConfig(shieldName, itConfig);
+        for (String itemName : itConfig.getKeys(false)) {
+            Item item = getItemFromConfig(itemName, itConfig);
 
-            if (shield != null) {
-                itemsList.put(shieldName, shield);
+            if (item != null) {
+                itemsList.put(itemName, item);
             }
         }
     }
