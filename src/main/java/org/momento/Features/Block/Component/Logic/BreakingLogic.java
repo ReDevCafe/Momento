@@ -2,6 +2,7 @@ package org.momento.Features.Block.Component.Logic;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import org.bukkit.Location;
@@ -14,8 +15,9 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.BoundingBox;
 import org.momento.Features.Block.Block;
 import org.momento.Features.Block.BlockLogic;
-import org.momento.Features.Block.Component.Data.BlockDropComponent;
-import org.momento.Features.Item.Implements.ItemFactory;
+import org.momento.Features.Block.Component.Data.BlockDataComponent;
+import org.momento.Features.Item.Item;
+import org.momento.Momento;
 
 public class BreakingLogic implements BlockLogic {
 
@@ -45,27 +47,28 @@ public class BreakingLogic implements BlockLogic {
 
     private void breakNaturally(Block block, org.bukkit.block.Block blockData)
     {
-        Location loc = blockData.getLocation();
-        World world = loc.getWorld();
+        Location location = blockData.getLocation();
+        World world = location.getWorld();
         if (world == null) return;
 
-
-        Collection<ItemStack> drops = new ArrayList<ItemStack>();
+        Collection<ItemStack> drops = new ArrayList<>();
         Material blockType = blockData.getType();
         
-        BlockDropComponent blockDrop = block.findComponentByType(BlockDropComponent.class);
-        if(blockDrop != null) 
+        BlockDataComponent bData = block.findComponentByType(BlockDataComponent.class);
+        if(bData != null) 
         {
-            for(String object : blockDrop.drop)
-                drops.add(ItemFactory.itemsList.get(object).copy().getItemStack());
+            Map<String, Item> itemsList = Momento.factory_item.itemsList;
+            
+            for(String object : bData.drop)
+                drops.add(itemsList.get(object).copy().getItemStack());
         }
+
         blockData.setType(Material.AIR);
-
         for (ItemStack drop : drops) 
-            world.dropItemNaturally(loc, drop);
+            world.dropItemNaturally(location, drop);
 
-        world.spawnParticle(Particle.BLOCK_CRACK, loc.add(0.5, 0.5, 0.5), 30, 0.3, 0.3, 0.3, blockType.createBlockData());
-        world.playSound(loc, blockType.createBlockData().getSoundGroup().getBreakSound(), 1.0f, 1.0f);
+        world.spawnParticle(Particle.BLOCK_CRACK, location.add(0.5, 0.5, 0.5), 30, 0.3, 0.3, 0.3, blockType.createBlockData());
+        world.playSound(location, blockType.createBlockData().getSoundGroup().getBreakSound(), 1.0f, 1.0f);
     }
     
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.Display.Billboard;
 import org.bukkit.entity.Display.Brightness;
 import org.bukkit.entity.ItemDisplay;
@@ -14,20 +15,26 @@ import org.bukkit.util.Transformation;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.momento.Momento;
-import org.momento.Features.Item.ItemComponent;
 
 public class Block implements Serializable, Cloneable
 {
 
-    private List<? extends BlockComponent> blockComponent;
+    private final List<? extends BlockComponent> blockComponent;
     private org.bukkit.block.Block block;
     private Location location;
     
     public ItemDisplay blockDisplay;
+    public String identifier;
 
-    public Block(List<? extends BlockComponent> blockComponent)
+    @SuppressWarnings("LeakingThisInConstructor")
+    public Block(String identifier, List<? extends BlockComponent> blockComponent)
     {
+        this.identifier = identifier;
         this.blockComponent = blockComponent;
+
+        for (BlockComponent startComponent : blockComponent)
+            if (startComponent.loadAtStart())
+                block = startComponent.init(this, block);
     }
     
     public void push(Location location)
@@ -38,6 +45,7 @@ public class Block implements Serializable, Cloneable
         initComponents();
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
     public void clone(Location location) 
     {
         try {
@@ -45,10 +53,14 @@ public class Block implements Serializable, Cloneable
             clone.push(location);
 
             // implement item (block) display entity 
-            blockDisplay = location.getWorld().spawn(location, ItemDisplay.class);
+            World world = location.getWorld();
+            if(world == null) throw new IllegalStateException("World is null (???)");
+
+            blockDisplay = world.spawn(location, ItemDisplay.class);
 
             ItemStack displayBlock = new ItemStack(Material.KNOWLEDGE_BOOK);
             ItemMeta meta = displayBlock.getItemMeta();
+            assert meta != null;
             meta.setCustomModelData(123);
 
             displayBlock.setItemMeta(meta);
@@ -65,25 +77,24 @@ public class Block implements Serializable, Cloneable
             
             clone.blockDisplay = blockDisplay;
             Momento.blocks.blocks.put(location, clone);
-        } catch (Exception e) {
+        } catch (CloneNotSupportedException | IllegalArgumentException e) {
             e.printStackTrace();
         }
     }
 
     private void initComponents()
     {
-        for (BlockComponent itemComponent : blockComponent)
-        {
-            block = itemComponent.init(block);
-        }
+        for (BlockComponent component : blockComponent)
+            if(!component.loadAtStart())
+                block = component.init(this, block);
     }
 
-     public <T extends BlockComponent> T findComponentByType(Class<T> type) {
-        for (BlockComponent component : blockComponent) {
-            if (type.isInstance(component)) {
+    public <T extends BlockComponent> T findComponentByType(Class<T> type)
+    {
+        for (BlockComponent component : blockComponent)
+            if (type.isInstance(component))
                 return type.cast(component);
-            }
-        }
+        
         return null;
     }
 

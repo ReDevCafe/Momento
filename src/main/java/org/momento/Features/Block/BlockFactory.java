@@ -1,5 +1,6 @@
 package org.momento.Features.Block;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +11,14 @@ import org.momento.Data.BlockComponentRegistry;
 import org.momento.Momento;
 
 public class BlockFactory {
-    public static Map<String, Block> blocksList;
+    public Map<String, Block> blocksList;
 
-    protected static Block getBlockFromConfig(String blockName, ConfigurationSection config) {
+    public BlockFactory() {
+        populateBlocks();
+    }
+
+    @SuppressWarnings("CallToPrintStackTrace")
+    protected Block getBlockFromConfig(String blockName, ConfigurationSection config) {
         ConfigurationSection blockData = config.getConfigurationSection(blockName.replace(" ", "_").toLowerCase());
         if (blockData == null) return null;
 
@@ -30,15 +36,15 @@ public class BlockFactory {
                 BlockComponent component = componentClass.getDeclaredConstructor().newInstance();
                 component.param(componentSection);
                 blockComponents.add(component);
-            } catch (Exception e) {
+            } catch (IllegalAccessException | IllegalArgumentException | InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
 
-        return new Block(blockComponents);
+        return new Block(blockName, blockComponents);
     }
 
-    public static void populateBlocks(){
+    protected void populateBlocks(){
         blocksList = new HashMap<>();
         ConfigurationSection blConfig = Momento.config.getConfigurationSection("blocks");
         if (blConfig == null) return;

@@ -27,6 +27,9 @@ public final class Momento extends JavaPlugin {
     public static BlockFile blocks;
     public static Plugin plugin;
 
+    public static ItemFactory factory_item;
+    public static BlockFactory factory_block;
+
     //TODO: put pluginManager and getCommand somewhere else
     @Override
     public void onEnable() {
@@ -36,11 +39,11 @@ public final class Momento extends JavaPlugin {
         items = new ItemFile();
         blocks = new BlockFile();
 
-        BlockComponentRegistry.init();
-        BlockFactory.populateBlocks();
-
         ItemComponentRegistry.init();
-        ItemFactory.populateItems();
+        factory_item = new ItemFactory();
+        
+        BlockComponentRegistry.init();
+        factory_block = new BlockFactory();
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new ChatSystem(), this);
@@ -56,6 +59,7 @@ public final class Momento extends JavaPlugin {
 
     @Override
     public void onDisable() {
+                                // <3 
         items.saveItems();      // if server crash I guess everything will be rollback (I hope not)
         blocks.saveBlocks();    // if server crash I guess everything will be rollback (I hope not)
     }

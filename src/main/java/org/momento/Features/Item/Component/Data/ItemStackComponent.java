@@ -15,6 +15,14 @@ public class ItemStackComponent extends ItemComponent
 
     public ItemStackComponent() {}
 
+    // Suicide vraiment
+    public ItemStackComponent(String name, Material material, int modelData) 
+    {
+        this.name = name;
+        this.material = material;
+        this.modelData = modelData;
+    }
+
     @Override
     public void param(ConfigurationSection section) {
         this.name = section.getString("name");

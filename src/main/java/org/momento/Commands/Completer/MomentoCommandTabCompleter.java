@@ -7,8 +7,6 @@ import java.util.List;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
-import org.momento.Features.Block.BlockFactory;
-import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Momento;
 
 public class MomentoCommandTabCompleter implements TabCompleter
@@ -34,10 +32,10 @@ public class MomentoCommandTabCompleter implements TabCompleter
                 switch(args[0])
                 {
                     case "give":
-                        completions.addAll(ItemFactory.itemsList.keySet());
+                        completions.addAll(Momento.factory_item.itemsList.keySet());
                         break;
                     case "setblock":
-                        completions.addAll(BlockFactory.blocksList.keySet());
+                        completions.addAll(Momento.factory_block.blocksList.keySet());
                         break;
                     case "debug":
                         completions.addAll(Arrays.asList(

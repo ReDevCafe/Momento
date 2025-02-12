@@ -12,10 +12,16 @@ import org.momento.Features.Item.ItemComponent;
 import org.momento.Momento;
 
 public class ItemFactory {
-    public static Map<String, Item> itemsList;
+    public Map<String, Item> itemsList;
 
-    protected static Item getItemFromConfig(String shieldName, ConfigurationSection config) {
-        ConfigurationSection itemData = config.getConfigurationSection(shieldName.replace(" ", "_").toLowerCase());
+
+    public ItemFactory() 
+    {
+        populateItems();
+    }
+
+    protected Item getItemFromConfig(String itemName, ConfigurationSection config) {
+        ConfigurationSection itemData = config.getConfigurationSection(itemName.replace(" ", "_").toLowerCase());
         if (itemData == null) return null;
 
         List<ItemComponent> cmpList = new ArrayList<>(); 
@@ -39,7 +45,7 @@ public class ItemFactory {
         return new Item(cmpList);
     }
 
-    public static void populateItems() {
+    protected void populateItems() {
         itemsList = new HashMap<>();
         ConfigurationSection itConfig = Momento.config.getConfigurationSection("items");
         if (itConfig == null) return;

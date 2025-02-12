@@ -35,7 +35,7 @@ public class MomentoCommand implements CommandExecutor {
             switch(args[0])
             {
                 case "give":
-                    ItemStack item = ItemFactory.itemsList.get(object).copy().getItemStack();
+                    ItemStack item = Momento.factory_item.itemsList.get(object).copy().getItemStack();
                     player.getInventory().addItem(item);
                     player.sendMessage("You've been given " + object);
                     break;
@@ -46,7 +46,7 @@ public class MomentoCommand implements CommandExecutor {
                         break;
                     }
 
-                    Block block = BlockFactory.blocksList.get(object);
+                    Block block = Momento.factory_block.blocksList.get(object);
                     try {
 
                         Location location = new Location(
