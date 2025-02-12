@@ -53,6 +53,7 @@ public final class Momento extends JavaPlugin {
         pluginManager.registerEvents(new BreakingBlock(), this);
 
         PluginCommand momentoCommand = getCommand("momento");
+        assert momentoCommand != null;
         momentoCommand.setExecutor(new MomentoCommand(this));
         momentoCommand.setTabCompleter(new MomentoCommandTabCompleter(this));
     }

@@ -13,7 +13,9 @@ import org.momento.Momento;
 public class BlockFactory {
     public Map<String, Block> blocksList;
 
-    public BlockFactory() {
+    @SuppressWarnings("OverridableMethodCallInConstructor")
+    public BlockFactory() 
+    {
         populateBlocks();
     }
 
@@ -44,7 +46,8 @@ public class BlockFactory {
         return new Block(blockName, blockComponents);
     }
 
-    protected void populateBlocks(){
+    protected void populateBlocks()
+    {
         blocksList = new HashMap<>();
         ConfigurationSection blConfig = Momento.config.getConfigurationSection("blocks");
         if (blConfig == null) return;

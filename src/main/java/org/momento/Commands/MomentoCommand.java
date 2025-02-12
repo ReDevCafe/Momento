@@ -7,8 +7,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.momento.Features.Block.Block;
-import org.momento.Features.Block.BlockFactory;
-import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Features.Item.Item;
 import org.momento.Momento;
 
@@ -19,9 +17,11 @@ public class MomentoCommand implements CommandExecutor {
     }
 
     @Override
+    @SuppressWarnings("CallToPrintStackTrace")
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
     {
         if (!(sender instanceof Player)) {
+            assert sender != null;
             sender.sendMessage("This command can only be used by players.");
             return true;
         }
@@ -58,8 +58,10 @@ public class MomentoCommand implements CommandExecutor {
 
                         block.clone(location);
                         player.sendMessage("Block placed at " + location.toString());
-                    } catch (Exception e) {
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
                     }
+
                 case "debug":
                     switch (args[1])
                     {
@@ -79,7 +81,7 @@ public class MomentoCommand implements CommandExecutor {
                 default:
                     break;
             }
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             player.sendMessage("Object not found.");
         }
 

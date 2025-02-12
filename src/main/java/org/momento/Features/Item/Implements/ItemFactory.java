@@ -1,5 +1,6 @@
 package org.momento.Features.Item.Implements;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,12 +15,13 @@ import org.momento.Momento;
 public class ItemFactory {
     public Map<String, Item> itemsList;
 
-
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public ItemFactory() 
     {
         populateItems();
     }
 
+    @SuppressWarnings("CallToPrintStackTrace")
     protected Item getItemFromConfig(String itemName, ConfigurationSection config) {
         ConfigurationSection itemData = config.getConfigurationSection(itemName.replace(" ", "_").toLowerCase());
         if (itemData == null) return null;
@@ -37,7 +39,7 @@ public class ItemFactory {
                 ItemComponent component = componentClass.getDeclaredConstructor().newInstance();
                 component.param(componentSection);
                 cmpList.add(component);         
-            } catch (Exception e) {
+            } catch (IllegalAccessException | IllegalArgumentException | InstantiationException | NoSuchMethodException | SecurityException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
@@ -53,9 +55,8 @@ public class ItemFactory {
         for (String itemName : itConfig.getKeys(false)) {
             Item item = getItemFromConfig(itemName, itConfig);
 
-            if (item != null) {
+            if (item != null)
                 itemsList.put(itemName, item);
-            }
         }
     }
 }
