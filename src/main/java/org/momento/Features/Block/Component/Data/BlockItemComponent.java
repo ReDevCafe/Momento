@@ -7,6 +7,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.momento.Features.Block.Block;
 import org.momento.Features.Block.BlockComponent;
 import org.momento.Features.Item.Component.Data.ItemStackComponent;
+import org.momento.Features.Item.Component.Data.StackableComponent;
 import org.momento.Features.Item.Item;
 import org.momento.Momento;
 
@@ -28,7 +29,8 @@ public class BlockItemComponent extends BlockComponent{
         System.err.println("AAAAAAAAAAAAAAAAAAA");
         Item item = new Item(
             Arrays.asList(
-                new ItemStackComponent(name, Material.KNOWLEDGE_BOOK, modelData)
+                new ItemStackComponent(name, Material.KNOWLEDGE_BOOK, modelData),
+                new StackableComponent(64, 1)
             )
         );
 

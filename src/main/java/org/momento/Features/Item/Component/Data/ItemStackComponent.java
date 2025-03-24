@@ -5,8 +5,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.momento.Features.Item.ItemComponent;
-
-
 public class ItemStackComponent extends ItemComponent
 {
     private String name;
@@ -15,7 +13,6 @@ public class ItemStackComponent extends ItemComponent
 
     public ItemStackComponent() {}
 
-    // Suicide vraiment
     public ItemStackComponent(String name, Material material, int modelData) 
     {
         this.name = name;

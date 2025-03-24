@@ -19,6 +19,7 @@ import org.momento.Features.Block.BlockFactory;
 import org.momento.Features.Block.BlockFile;
 import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Features.Item.ItemFile;
+import org.momento.TEST.PrismAnot;
 
 public final class Momento extends JavaPlugin {
 
@@ -63,5 +64,11 @@ public final class Momento extends JavaPlugin {
                                 // <3 
         items.saveItems();      // if server crash I guess everything will be rollback (I hope not)
         blocks.saveBlocks();    // if server crash I guess everything will be rollback (I hope not)
+    }
+
+    @PrismAnot(descPath="functionTest")
+    public int Test(int a, Test b)
+    {
+        return 1;
     }
 }
