@@ -12,7 +12,7 @@ public class SignEvent implements Listener {
         String[] lines = event.getLines();
         if(lines.length == 0) return;
         
-        for(int i = 0; i < lines.length; i++)
+    for(int i = 0; i < lines.length; i++)
             event.setLine(i, EmojiSystem.StringReplacer(lines[i], "emoji"));
     }
 }

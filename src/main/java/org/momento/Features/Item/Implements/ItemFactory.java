@@ -44,7 +44,7 @@ public class ItemFactory {
             }
         }
 
-        return new Item(cmpList);
+        return new Item(itemName, cmpList);
     }
 
     protected void populateItems() {

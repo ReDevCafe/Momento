@@ -46,4 +46,9 @@ public class ItemStackComponent extends ItemComponent
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
+
+    @Override
+    public String toString() {
+        return String.format("name: %s, material: %s", this.name, this.material);
+    }
 }

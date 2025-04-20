@@ -26,8 +26,8 @@ public class BlockItemComponent extends BlockComponent{
     @Override
     public org.bukkit.block.Block init(Block block, org.bukkit.block.Block blockData)
     {
-        System.err.println("AAAAAAAAAAAAAAAAAAA");
         Item item = new Item(
+            block.identifier,
             Arrays.asList(
                 new ItemStackComponent(name, Material.KNOWLEDGE_BOOK, modelData),
                 new StackableComponent(64, 1)

@@ -28,5 +28,12 @@ public class StackableComponent extends ItemComponent {
         this.maxStackSize = section.getInt("max-stack-size", 64);
         this.currentStackSize = section.getInt("default-stack-size", 1);
     }
+
     
+
+    @Override
+    public String toString() 
+    {
+        return String.format("current stack size: %d, max stack size: %d", this.currentStackSize, this.maxStackSize);
+    }
 }

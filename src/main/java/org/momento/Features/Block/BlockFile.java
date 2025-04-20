@@ -48,11 +48,9 @@ public class BlockFile {
                 file.createNewFile();
             }
 
-            FileOutputStream fileOutputStream = new FileOutputStream(file);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(blocks);
-            objectOutputStream.close();
-            fileOutputStream.close();
+            try (FileOutputStream fileOutputStream = new FileOutputStream(file); ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+                objectOutputStream.writeObject(blocks);
+            }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -74,11 +72,9 @@ public class BlockFile {
                 file.createNewFile();
             }
 
-            FileInputStream fileInputStream = new FileInputStream(file);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            hashMap = (HashMap<Location, Block>) objectInputStream.readObject();
-            objectInputStream.close();
-            fileInputStream.close();
+            try (FileInputStream fileInputStream = new FileInputStream(file); ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+                hashMap = (HashMap<Location, Block>) objectInputStream.readObject();
+            }
 
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

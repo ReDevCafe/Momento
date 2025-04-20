@@ -11,16 +11,20 @@ import org.bukkit.persistence.PersistentDataType;
 import org.momento.Data.MomentoKeys;
 import org.momento.Momento;
 
-public class Item implements Serializable {
+public class Item implements Serializable 
+{
+    public final String identifier; 
     private final List<? extends ItemComponent> objectComponent;
+
     private String uuid;
     private transient ItemStack itemStack;
 
-    public Item(List<? extends ItemComponent> objectComponent)
+    public Item(String identifier, List<? extends ItemComponent> objectComponent)
     {
         this.objectComponent = objectComponent;
         this.uuid = UUID.randomUUID().toString();
         this.itemStack = new ItemStack(Material.STONE);
+        this.identifier = identifier;
 
         initComponents();
 
@@ -37,7 +41,7 @@ public class Item implements Serializable {
 
     public Item copy()
     {
-        Item newItem = new Item(this.objectComponent);
+        Item newItem = new Item(identifier, this.objectComponent);
         newItem.uuid = UUID.randomUUID().toString();
         newItem.itemStack = this.itemStack.clone();
     
@@ -82,6 +86,14 @@ public class Item implements Serializable {
 
     @Override
     public String toString() {
-        return "[U=\""+uuid+"\", CS=\""+objectComponent.size()+"\",]";
+        String result = String.format("[identifier: %s, uuid: %s]\n", identifier, uuid); 
+
+        for (ItemComponent itemComponent : objectComponent) 
+        {
+            result += String.format("   %s\n", itemComponent.toString());
+        }
+
+        result += "\n";
+        return result;
     }
 }

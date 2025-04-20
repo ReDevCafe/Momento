@@ -22,4 +22,9 @@ public class DurabilityComponent extends ItemComponent
     {
         return itemStack;
     }
+
+    @Override
+    public String toString() {
+        return String.format("durability=%s on %s", this.durability, this.maxDurability);
+    }
 }

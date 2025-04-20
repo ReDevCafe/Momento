@@ -15,11 +15,11 @@ import org.momento.Events.BreakingBlock;
 import org.momento.Events.ChatSystem;
 import org.momento.Events.PlayerShieldBlock;
 import org.momento.Events.SignEvent;
+import org.momento.Events.Stackable;
 import org.momento.Features.Block.BlockFactory;
 import org.momento.Features.Block.BlockFile;
 import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Features.Item.ItemFile;
-import org.momento.TEST.PrismAnot;
 
 public final class Momento extends JavaPlugin {
 
@@ -52,6 +52,7 @@ public final class Momento extends JavaPlugin {
         pluginManager.registerEvents(new SignEvent(), this);
         pluginManager.registerEvents(new PlayerShieldBlock(), this);
         pluginManager.registerEvents(new BreakingBlock(), this);
+        pluginManager.registerEvents(new Stackable(), this);
 
         PluginCommand momentoCommand = getCommand("momento");
         assert momentoCommand != null;
@@ -64,11 +65,5 @@ public final class Momento extends JavaPlugin {
                                 // <3 
         items.saveItems();      // if server crash I guess everything will be rollback (I hope not)
         blocks.saveBlocks();    // if server crash I guess everything will be rollback (I hope not)
-    }
-
-    @PrismAnot(descPath="functionTest")
-    public int Test(int a, Test b)
-    {
-        return 1;
     }
 }
