@@ -1,6 +1,7 @@
 package org.momento.Events;
 
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -50,7 +51,7 @@ public class Stackable implements Listener
         if(clickedStackable == null) throw new IllegalStateException();
         
         int maxStackSize = clickedStackable.maxStackSize;
-
+        event.setCancelled(true);
         if(event.isLeftClick())
         {
             if(clicked.getAmount() >= maxStackSize) return;
@@ -75,9 +76,9 @@ public class Stackable implements Listener
             else 
             {
                 System.err.println("NON");
-                
-                event.setCursor(null);
+
                 cursor.setType(Material.AIR);
+                ((Player) event.getWhoClicked()).updateInventory();
                 Momento.items.items.remove(cursorSignature);
 
                 clicked.setAmount(newAmount);
