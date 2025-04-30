@@ -34,6 +34,6 @@ public class StackableComponent extends ItemComponent {
     @Override
     public String toString() 
     {
-        return String.format("current stack size: %d, max stack size: %d", this.currentStackSize, this.maxStackSize);
+        return String.format("§ccurrent stack size: §6%d§f, §cmax stack size: §6%d§r", this.currentStackSize, this.maxStackSize);
     }
 }

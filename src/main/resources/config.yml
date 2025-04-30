@@ -12,6 +12,17 @@ chat:
     "oh no ur ip": "\n\n\n\n\n\n\uE102\n"
     "ratio plus pas lu": "\n\n\n\n\n\n\uE103\n"
 
+blocks:
+  test_block:
+    BlockData:
+      material: "OBSIDIAN"
+      drop: 
+        - "test_block"
+        - "dirt_shield"
+    BlockItem:
+      name: "Gay sex"
+      model-data: 123
+
 items:
   dirt_shield:
     ItemStack:
@@ -20,3 +31,10 @@ items:
       model-data: 1
     Durability:
       durability: 1
+  skibidi_item:
+    ItemStack:
+      name: "Skibidi"
+      material: "SKIBIDI"
+      model-data: 1
+    Stackable:
+      max-stack-size: 32

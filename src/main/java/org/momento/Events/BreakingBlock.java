@@ -22,7 +22,7 @@ public class BreakingBlock implements Listener {
         org.bukkit.block.Block real_block = event.getBlock();
         Block block = Momento.blocks.blocks.get(real_block.getLocation());
         if(block == null) return;
-
+        
         breakingSystem.run(block, real_block);
     }
     

@@ -49,6 +49,6 @@ public class ItemStackComponent extends ItemComponent
 
     @Override
     public String toString() {
-        return String.format("name: %s, material: %s", this.name, this.material);
+        return String.format("§cname: §6%s§f, §cmaterial: §6%s§r", this.name, this.material);
     }
 }

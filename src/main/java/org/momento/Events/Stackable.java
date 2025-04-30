@@ -45,7 +45,7 @@ public class Stackable implements Listener
         Item clickedItem = Momento.items.items.get(clickedContainer.get(MomentoKeys.SIGNATURE, PersistentDataType.STRING));
         if(clickedItem == null) throw new IllegalStateException();
 
-        //if(!clickedItem.identifier.equals(cursorItem.identifier)) throw new IllegalStateException();
+        if(!clickedItem.identifier.equals(cursorItem.identifier)) throw new IllegalStateException();
 
         StackableComponent clickedStackable = clickedItem.findComponentByType(StackableComponent.class);
         if(clickedStackable == null) throw new IllegalStateException();

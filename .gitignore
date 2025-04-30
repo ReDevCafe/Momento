@@ -2,9 +2,5 @@
 .vscode
 out
 target
-<<<<<<< HEAD
 makefile 
 src/test
-=======
-makefile 
->>>>>>> 613d39170bc6e1df8348e78376806be9199181ab

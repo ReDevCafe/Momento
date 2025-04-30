@@ -21,7 +21,6 @@ public class Block implements Serializable
         this.uuid = UUID.randomUUID().toString();
 
         initComponents();
-
     }
 
     private void initComponents()

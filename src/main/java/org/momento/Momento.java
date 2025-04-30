@@ -11,6 +11,7 @@ import org.momento.Commands.MomentoCommand;
 import org.momento.Data.BlockComponentRegistry;
 import org.momento.Data.ItemComponentRegistry;
 import org.momento.Events.AnvilRename;
+import org.momento.Events.BlockPlacing;
 import org.momento.Events.BreakingBlock;
 import org.momento.Events.ChatSystem;
 import org.momento.Events.PlayerShieldBlock;
@@ -53,6 +54,7 @@ public final class Momento extends JavaPlugin {
         pluginManager.registerEvents(new PlayerShieldBlock(), this);
         pluginManager.registerEvents(new BreakingBlock(), this);
         pluginManager.registerEvents(new Stackable(), this);
+        pluginManager.registerEvents(new BlockPlacing(), this);
 
         PluginCommand momentoCommand = getCommand("momento");
         assert momentoCommand != null;

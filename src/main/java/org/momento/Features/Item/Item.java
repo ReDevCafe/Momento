@@ -1,7 +1,9 @@
 package org.momento.Features.Item;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bukkit.Material;
@@ -13,19 +15,25 @@ import org.momento.Momento;
 
 public class Item implements Serializable 
 {
-    public final String identifier; 
+    public final String                         identifier; 
     private final List<? extends ItemComponent> objectComponent;
 
-    private String uuid;
-    private transient ItemStack itemStack;
+
+    private String                              uuid;
+    private transient ItemStack                 itemStack;
+
+    // FIXME: Probably should have his own component, but for now it's fine and reduce calls
+    public  Map<String, String>                 tags = new HashMap<>();
+
+
 
     public Item(String identifier, List<? extends ItemComponent> objectComponent)
     {
         this.objectComponent = objectComponent;
-        this.uuid = UUID.randomUUID().toString();
-        this.itemStack = new ItemStack(Material.STONE);
         this.identifier = identifier;
+        this.uuid = UUID.randomUUID().toString();
 
+        this.itemStack = new ItemStack(Material.STONE);
         initComponents();
 
         ItemMeta meta = itemStack.getItemMeta();
@@ -44,6 +52,7 @@ public class Item implements Serializable
         Item newItem = new Item(identifier, this.objectComponent);
         newItem.uuid = UUID.randomUUID().toString();
         newItem.itemStack = this.itemStack.clone();
+        newItem.tags = this.tags;
     
         ItemMeta meta = newItem.itemStack.getItemMeta();
         assert meta != null;
@@ -86,14 +95,26 @@ public class Item implements Serializable
 
     @Override
     public String toString() {
-        String result = String.format("[identifier: %s, uuid: %s]\n", identifier, uuid); 
+        String result = String.format("§d[§bidentifier: §6%s§f, §buuid: §6%s§d]§r\n", identifier, uuid); 
 
-        for (ItemComponent itemComponent : objectComponent) 
+        if(!objectComponent.isEmpty()) 
         {
-            result += String.format("   %s\n", itemComponent.toString());
+            result += "§a->>> Components:\n§r";
+            for (ItemComponent itemComponent : objectComponent) 
+            {
+                result += String.format("§a >  %s\n", itemComponent.toString());
+            }
         }
 
-        result += "\n";
+        if(!tags.isEmpty()) 
+        {
+            result += "§a->>> Tags:\n§r";
+            for (Map.Entry<String, String> entry : tags.entrySet()) 
+            {
+                result += String.format("§a >  %s: %s\n", entry.getKey(), entry.getValue());
+            }
+        }
+
         return result;
     }
 }

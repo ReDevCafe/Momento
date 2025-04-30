@@ -25,6 +25,6 @@ public class DurabilityComponent extends ItemComponent
 
     @Override
     public String toString() {
-        return String.format("durability=%s on %s", this.durability, this.maxDurability);
+        return String.format("§cdurability: §6%s §fon §6%s§r", this.durability, this.maxDurability);
     }
 }

@@ -70,6 +70,8 @@ public class BreakingLogic implements BlockLogic {
 
         world.spawnParticle(Particle.BLOCK_CRACK, location.add(0.5, 0.5, 0.5), 30, 0.3, 0.3, 0.3, blockType.createBlockData());
         world.playSound(location, blockType.createBlockData().getSoundGroup().getBreakSound(), 1.0f, 1.0f);
+
+        Momento.blocks.blocks.remove(location);
     }
     
 }

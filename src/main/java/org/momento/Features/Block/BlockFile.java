@@ -38,13 +38,15 @@ public class BlockFile {
     public void saveBlocks() {
         try {
             File dataFolder = Momento.plugin.getDataFolder();
-            if (!dataFolder.exists()) {
+            if (!dataFolder.exists()) 
+            {
                 System.out.println("Data folder does not exist!");
                 dataFolder.mkdirs();
             }
 
             File file = new File(dataFolder, "blocks.bin");
-            if (!file.exists()) {
+            if (!file.exists()) 
+            {
                 file.createNewFile();
             }
 

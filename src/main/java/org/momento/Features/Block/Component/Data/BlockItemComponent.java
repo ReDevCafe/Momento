@@ -16,9 +16,6 @@ public class BlockItemComponent extends BlockComponent{
     private int modelData;
     private String name;
 
-    
-
-
     @Override
     public Boolean loadAtStart() {
         return true;
@@ -26,6 +23,7 @@ public class BlockItemComponent extends BlockComponent{
     @Override
     public org.bukkit.block.Block init(Block block, org.bukkit.block.Block blockData)
     {
+
         Item item = new Item(
             block.identifier,
             Arrays.asList(
@@ -33,6 +31,11 @@ public class BlockItemComponent extends BlockComponent{
                 new StackableComponent(64, 1)
             )
         );
+        
+        // put the information that this is placeable in slot 16
+        item.tags.put("is-placeable", "true");
+
+        System.err.println(item.tags.containsKey("is-placeable"));
 
         Momento.factory_item.itemsList.put(block.identifier, item);
         return blockData;
