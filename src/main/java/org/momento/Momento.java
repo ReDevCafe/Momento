@@ -22,17 +22,20 @@ import org.momento.Features.Block.BlockFile;
 import org.momento.Features.Item.Implements.ItemFactory;
 import org.momento.Features.Item.ItemFile;
 
+@PrismClass
 public final class Momento extends JavaPlugin {
 
     public static FileConfiguration config;
     public static ItemFile items;
     public static BlockFile blocks;
     public static Plugin plugin;
-
+    
+    @PrismAnot(title="E", description="d")
     public static ItemFactory factory_item;
     public static BlockFactory factory_block;
 
     //TODO: put pluginManager and getCommand somewhere else
+    @PrismAnot(title="OnEnable func", description="OnEnable func")
     @Override
     public void onEnable() {
         saveDefaultConfig();
