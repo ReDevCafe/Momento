@@ -4,13 +4,20 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.momento.Features.Item.ItemComponent;
 
+@PrismClass
 public class DurabilityComponent extends ItemComponent
 {
+    @PrismAnot(
+        title="Durability", 
+        description="Durability of the item"
+    ) 
     public long durability;
+    @PrismAnot(title="Max Durability", description="Max durability of the item")
     public long maxDurability;
 
     public DurabilityComponent() {}
 
+    @PrismAnot(description="Debug $!s1")
     @Override
     public void param(ConfigurationSection section) 
     {
