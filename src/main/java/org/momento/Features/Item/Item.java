@@ -1,5 +1,9 @@
 package org.momento.Features.Item;
 
+import java.io.Serializable;
+import java.util.List;
+import java.util.UUID;
+
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -7,23 +11,17 @@ import org.bukkit.persistence.PersistentDataType;
 import org.momento.Data.MomentoKeys;
 import org.momento.Momento;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.UUID;
-
 public class Item implements Serializable {
     private final List<? extends ItemComponent> objectComponent;
     private final String uuid;
     private transient ItemStack itemStack;
 
-    public Item(List<? extends ItemComponent> objectComponent)
+    public Item(List<? extends ItemComponent> objectComponent, String id)
     {
         this.objectComponent = objectComponent;
         this.uuid = UUID.randomUUID().toString();
+        
         this.itemStack = new ItemStack(Material.STONE);
-
-        initComponents();
-
 
         ItemMeta meta = itemStack.getItemMeta();
         assert meta != null;
@@ -33,7 +31,13 @@ public class Item implements Serializable {
                 PersistentDataType.STRING, uuid
         );
 
+        meta.getPersistentDataContainer().set(
+                MomentoKeys.PID,
+                PersistentDataType.STRING, id
+        );  
+
         itemStack.setItemMeta(meta);
+        initComponents();
 
         Momento.items.items.put(uuid, this);
     }
@@ -41,16 +45,13 @@ public class Item implements Serializable {
     private void initComponents()
     {
         for (ItemComponent itemComponent : objectComponent)
-        {
             itemStack = itemComponent.init(itemStack);
-        }
     }
 
     public <T extends ItemComponent> T findComponentByType(Class<T> type) {
         for (ItemComponent component : objectComponent) {
-            if (type.isInstance(component)) {
+            if (type.isInstance(component))
                 return type.cast(component);
-            }
         }
         return null;
     }

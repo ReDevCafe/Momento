@@ -1,23 +1,23 @@
 package org.momento.Features.Item.Implements;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
-import org.momento.Momento;
 import org.momento.Data.ComponentRegistry;
 import org.momento.Features.Item.Item;
 import org.momento.Features.Item.ItemComponent;
+import org.momento.Momento;
 
 public class ItemFactory {
     public static Map<String, ItemStack> itemsList = new HashMap<>();
 
-    public static ItemStack getItemFromConfig(String shieldName, ConfigurationSection config) {
-        ConfigurationSection itemData = config.getConfigurationSection(shieldName.replace(" ", "_").toLowerCase());
-        if (itemData == null) return null;
+    public static ItemStack getItemFromConfig(String itemName, ConfigurationSection config) {
+        ConfigurationSection itemData = config.getConfigurationSection(itemName.replace(" ", "_").toLowerCase());
+        if (itemData == null) throw new IllegalStateException("Item " + itemName + " is not configured");
 
         List<ItemComponent> cmpList = new ArrayList<>(); 
 
@@ -31,13 +31,15 @@ public class ItemFactory {
             try {
                 ItemComponent component = componentClass.getDeclaredConstructor().newInstance();
                 component.param(componentSection);
-                cmpList.add(component);         
+
+                if(component.Serializable()) cmpList.add(component); 
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
-        return new Item(cmpList).getItemStack();
+        return new Item(cmpList, itemName).getItemStack();
     }
 
     public static void populateItems() {
@@ -45,12 +47,11 @@ public class ItemFactory {
         ConfigurationSection itConfig = Momento.config.getConfigurationSection("items");
         if (itConfig == null) return;
         
-        for (String shieldName : itConfig.getKeys(false)) {
-            ItemStack shield = getItemFromConfig(shieldName, itConfig);
+        for (String itemName : itConfig.getKeys(false)) {
+            ItemStack item = getItemFromConfig(itemName, itConfig);
 
-            if (shield != null) {
-                itemsList.put(shieldName, shield);
-            }
+            if (item == null) throw new IllegalStateException("Item " + itemName + " is not in configuration (what?)");
+            itemsList.put(itemName, item);
         }
     }
 }
